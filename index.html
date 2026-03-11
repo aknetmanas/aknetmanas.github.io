@@ -1,0 +1,1899 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Акнет — г. Манас | Интернет и цифровое ТВ</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #0047FF;
+    --blue-dark: #0030CC;
+    --blue-light: #4C85FF;
+    --cyan: #00D4FF;
+    --dark: #05071A;
+    --dark2: #0C102E;
+    --dark3: #141840;
+    --gray: #8892B0;
+    --light: #E8EEFF;
+    --white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--dark);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  .lang-switcher {
+    display: flex;
+    background: rgba(255,255,255,0.07);
+    border-radius: 8px;
+    padding: 3px;
+    gap: 2px;
+  }
+
+  .lang-btn {
+    background: transparent;
+    border: none;
+    color: var(--gray);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+  }
+
+  .lang-btn.active {
+    background: var(--blue);
+    color: var(--white);
+  }
+
+  .lang-btn:hover:not(.active) { color: var(--white); }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 0 5%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(5,7,26,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0,71,255,0.2);
+    transition: all 0.3s;
+  }
+
+  .logo {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--gray);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: color 0.2s;
+    letter-spacing: 0.3px;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-cta {
+    background: var(--blue);
+    color: var(--white) !important;
+    padding: 0.5rem 1.2rem;
+    border-radius: 6px;
+    font-weight: 600 !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--blue-dark) !important; color: var(--white) !important; }
+
+  .burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 5px;
+  }
+
+  .burger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--white);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 70px; left: 0; right: 0;
+    background: var(--dark2);
+    padding: 1.5rem 5%;
+    border-bottom: 1px solid rgba(0,71,255,0.2);
+    z-index: 999;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .mobile-menu.active { display: flex; }
+
+  .mobile-menu a {
+    color: var(--light);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 5% 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(0,71,255,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 20% 80%, rgba(0,212,255,0.1) 0%, transparent 50%),
+      var(--dark);
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,71,255,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,71,255,0.07) 1px, transparent 1px);
+    background-size: 50px 50px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+  }
+
+  .hero-content {
+    position: relative;
+    max-width: 700px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0,212,255,0.1);
+    border: 1px solid rgba(0,212,255,0.3);
+    border-radius: 100px;
+    padding: 0.4rem 1rem;
+    font-size: 0.8rem;
+    color: var(--cyan);
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--cyan);
+    animation: pulse 2s infinite;
+  }
+
+  h1 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.8rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -2px;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  h1 .accent { color: var(--cyan); }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--gray);
+    line-height: 1.7;
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .btn-primary {
+    background: var(--blue);
+    color: var(--white);
+    padding: 0.9rem 2rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover { background: var(--blue-dark); transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,71,255,0.4); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    padding: 0.9rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    transition: all 0.2s;
+  }
+
+  .btn-outline:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 3rem;
+    animation: fadeUp 0.6s 0.4s ease both;
+    flex-wrap: wrap;
+  }
+
+  .stat-item { }
+
+  .stat-num {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .stat-num span { color: var(--cyan); }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--gray);
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  /* SECTIONS */
+  section { padding: 100px 5%; }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--cyan);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .section-sub {
+    color: var(--gray);
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 560px;
+    margin-bottom: 3rem;
+  }
+
+  /* TARIFFS */
+  #tarify { background: var(--dark2); }
+
+  .tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+    padding: 6px;
+    width: fit-content;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    padding: 0.6rem 1.4rem;
+    border-radius: 7px;
+    border: none;
+    background: transparent;
+    color: var(--gray);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .tab-btn.active {
+    background: var(--blue);
+    color: var(--white);
+  }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  .tariff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .tariff-card {
+    background: var(--dark3);
+    border: 1px solid rgba(0,71,255,0.15);
+    border-radius: 16px;
+    padding: 1.8rem;
+    position: relative;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+
+  .tariff-card:hover {
+    border-color: var(--blue);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,71,255,0.15);
+  }
+
+  .tariff-card.popular {
+    border-color: var(--cyan);
+    background: linear-gradient(135deg, rgba(0,71,255,0.15), rgba(0,212,255,0.08));
+  }
+
+  .popular-badge {
+    position: absolute;
+    top: -12px; left: 50%;
+    transform: translateX(-50%);
+    background: var(--cyan);
+    color: var(--dark);
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 4px 14px;
+    border-radius: 100px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+
+  .tariff-plan { font-size: 0.8rem; color: var(--gray); font-weight: 600; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
+
+  .tariff-price {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .tariff-price sub { font-size: 0.9rem; font-weight: 400; color: var(--gray); }
+
+  .tariff-speed {
+    font-size: 1rem;
+    color: var(--cyan);
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .tariff-features { list-style: none; }
+
+  .tariff-features li {
+    font-size: 0.85rem;
+    color: var(--gray);
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tariff-features li::before {
+    content: '✓';
+    color: var(--blue-light);
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+
+  .tariff-features li:last-child { border-bottom: none; }
+
+  .tariff-action {
+    margin-top: 1.5rem;
+    width: 100%;
+    text-align: center;
+    background: rgba(0,71,255,0.15);
+    color: var(--blue-light);
+    padding: 0.7rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .tariff-action:hover { background: var(--blue); color: var(--white); }
+
+  .tariff-card.popular .tariff-action { background: var(--cyan); color: var(--dark); }
+  .tariff-card.popular .tariff-action:hover { background: var(--blue-light); color: var(--white); }
+
+  /* PROMO */
+  /* PROMO SLIDER */
+  .promo-slider {
+    position: relative;
+    background: linear-gradient(135deg, rgba(0,71,255,0.2), rgba(0,212,255,0.1));
+    border: 1px solid rgba(0,212,255,0.3);
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+  }
+
+  .promo-slides {
+    position: relative;
+    min-height: 72px;
+  }
+
+  .promo-slide {
+    display: none;
+    align-items: center;
+    gap: 1.5rem;
+    animation: slideIn 0.4s ease;
+  }
+
+  .promo-slide.active { display: flex; }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .promo-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.2rem;
+  }
+
+  .promo-prev, .promo-next {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--white);
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .promo-prev:hover, .promo-next:hover {
+    background: var(--blue);
+    border-color: var(--blue);
+  }
+
+  .promo-dots { display: flex; gap: 6px; }
+
+  .promo-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+  }
+
+  .promo-dot.active {
+    background: var(--cyan);
+    width: 22px;
+    border-radius: 4px;
+  }
+
+  .promo-banner {
+    background: linear-gradient(135deg, rgba(0,71,255,0.2), rgba(0,212,255,0.1));
+    border: 1px solid rgba(0,212,255,0.3);
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .promo-icon { font-size: 2rem; }
+
+  .promo-text h3 { font-family: 'Unbounded', sans-serif; font-size: 1rem; font-weight: 800; margin-bottom: 0.3rem; }
+  .promo-text p { font-size: 0.9rem; color: var(--gray); }
+  .promo-text strong { color: var(--cyan); }
+
+  /* SERVICES */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .service-card {
+    background: var(--dark2);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.3s;
+  }
+
+  .service-card:hover {
+    border-color: rgba(0,71,255,0.4);
+    transform: translateY(-4px);
+  }
+
+  .service-icon {
+    width: 52px; height: 52px;
+    background: rgba(0,71,255,0.15);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .service-card h3 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+  }
+
+  .service-card p { font-size: 0.9rem; color: var(--gray); line-height: 1.6; }
+
+  /* CHANNELS */
+  #kanaly { background: var(--dark2); }
+
+  .channels-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .channel-group {
+    background: var(--dark3);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 1.2rem;
+  }
+
+  .channel-group-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--blue-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .channel-list { list-style: none; }
+
+  .channel-list li {
+    font-size: 0.82rem;
+    color: var(--gray);
+    padding: 0.25rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .channel-list li:last-child { border-bottom: none; }
+
+  /* CONNECT */
+  .connect-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .connect-info h3 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    color: var(--cyan);
+  }
+
+  .info-block {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+    background: var(--dark2);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .info-icon { font-size: 1.3rem; flex-shrink: 0; }
+
+  .info-label { font-size: 0.75rem; color: var(--gray); margin-bottom: 2px; }
+
+  .info-value { font-size: 0.95rem; font-weight: 600; color: var(--white); }
+
+  /* FORM */
+  .form-card {
+    background: var(--dark2);
+    border: 1px solid rgba(0,71,255,0.2);
+    border-radius: 20px;
+    padding: 2.5rem;
+  }
+
+  .form-card h3 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group { margin-bottom: 1.2rem; }
+
+  .form-group label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--gray);
+    margin-bottom: 0.5rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: 1.5px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    color: var(--white);
+    font-size: 0.95rem;
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--blue); }
+
+  .form-group select option { background: var(--dark2); }
+
+  .form-group textarea { resize: vertical; min-height: 100px; }
+
+  .form-submit {
+    width: 100%;
+    padding: 1rem;
+    background: var(--blue);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .form-submit:hover { background: var(--blue-dark); transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,71,255,0.4); }
+
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+    background: rgba(0,212,255,0.1);
+    border-radius: 12px;
+    border: 1px solid rgba(0,212,255,0.3);
+    color: var(--cyan);
+    font-weight: 600;
+  }
+
+  /* PAYMENT */
+  #oplata { background: var(--dark2); }
+
+  .payment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .payment-card {
+    background: var(--dark3);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.2s;
+  }
+
+  .payment-card:hover { border-color: rgba(0,71,255,0.4); transform: translateY(-3px); }
+
+  .payment-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+
+  .payment-card h4 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .payment-card p { font-size: 0.8rem; color: var(--gray); line-height: 1.5; }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark2);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 4rem 5% 2rem;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .footer-brand .logo { display: inline-block; margin-bottom: 1rem; }
+
+  .footer-brand p { font-size: 0.88rem; color: var(--gray); line-height: 1.7; max-width: 260px; }
+
+  .footer-phones {
+    margin-top: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .footer-phones a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: 'Unbounded', sans-serif;
+  }
+
+  .footer-phones a:hover { color: var(--cyan); }
+
+  .footer-col h4 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .footer-col ul { list-style: none; }
+
+  .footer-col li { margin-bottom: 0.6rem; }
+
+  .footer-col a {
+    color: var(--gray);
+    text-decoration: none;
+    font-size: 0.88rem;
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover { color: var(--white); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: gap;
+    gap: 1rem;
+  }
+
+  .footer-bottom p { font-size: 0.82rem; color: var(--gray); }
+
+  .social-links { display: flex; gap: 0.8rem; }
+
+  .social-links a {
+    width: 36px; height: 36px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: all 0.2s;
+  }
+
+  .social-links a:hover { background: var(--blue); }
+
+  /* WORKING HOURS */
+  .hours-grid {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+
+  .hour-chip {
+    background: rgba(0,71,255,0.1);
+    border: 1px solid rgba(0,71,255,0.2);
+    border-radius: 6px;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.78rem;
+    color: var(--blue-light);
+    font-weight: 500;
+  }
+
+  /* FLOATING WHATSAPP */
+  .float-wa {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 999;
+    width: 56px; height: 56px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 8px 25px rgba(37,211,102,0.4);
+    text-decoration: none;
+    animation: bounce 3s infinite;
+    transition: transform 0.2s;
+  }
+
+  .float-wa:hover { transform: scale(1.1); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .burger { display: flex; }
+
+    section { padding: 70px 5%; }
+
+    .hero { padding: 100px 5% 60px; }
+
+    .connect-grid { grid-template-columns: 1fr; }
+
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+
+    .footer-col:first-child { grid-column: 1 / -1; }
+
+    .hero-stats { gap: 1.5rem; }
+  }
+
+  @media (max-width: 480px) {
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+    .tariff-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo"><img src="data:image/png;base64,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" alt="Акнет" style="height:38px; width:auto; display:block;"></a>
+  <ul class="nav-links">
+    <li><a href="#tarify" data-ru="Тарифы" data-ky="Тарифтер">Тарифы</a></li>
+    <li><a href="#uslugi" data-ru="Услуги" data-ky="Кызматтар">Услуги</a></li>
+    <li><a href="#kanaly" data-ru="Каналы" data-ky="Каналдар">Каналы</a></li>
+    <li><a href="#oplata" data-ru="Оплата" data-ky="Төлөм">Оплата</a></li>
+    <li><a href="#kontakty" data-ru="Контакты" data-ky="Байланыш">Контакты</a></li>
+    <li><a href="#podklyuchitsya" class="nav-cta" data-ru="Подключиться" data-ky="Туташуу">Подключиться</a></li>
+  </ul>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('ru')">РУС</button>
+    <button class="lang-btn" onclick="setLang('ky')">КЫР</button>
+  </div>
+  <div class="burger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#tarify" onclick="closeMenu()">Тарифы</a>
+  <a href="#uslugi" onclick="closeMenu()">Услуги</a>
+  <a href="#kanaly" onclick="closeMenu()">Каналы</a>
+  <a href="#oplata" onclick="closeMenu()">Оплата</a>
+  <a href="#kontakty" onclick="closeMenu()">Контакты</a>
+  <a href="#podklyuchitsya" class="btn-primary" id="mob-connect-el" style="justify-content:center" onclick="closeMenu()">Подключиться</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge" id="hero-badge-el">🌐 г. Манас — Кыргызстан</div>
+    <h1 id="hero-title-el">Интернет<br>и <span class="accent">цифровое ТВ</span><br>в г. Манас</h1>
+    <p class="hero-sub" id="hero-sub-el">Высокоскоростной безлимитный интернет до 600 Мбит/с и более 200 цифровых телеканалов для всей семьи. Подключение в ЖК Асман и ЖК Элит Таурс!</p>
+    <div class="hero-actions">
+      <a href="#podklyuchitsya" class="btn-primary" id="hero-btn1-el">🚀 Подключиться</a>
+      <a href="#tarify" class="btn-outline" id="hero-btn2-el">Смотреть тарифы</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">600<span> Мбит/с</span></div>
+        <div class="stat-label">Максимальная скорость</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">200<span>+</span></div>
+        <div class="stat-label">Телеканалов</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">26<span> лет</span></div>
+        <div class="stat-label">На рынке Кыргызстана</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TARIFFS -->
+<section id="tarify">
+  <div class="section-label" id="tariff-label-el">Наши тарифы</div>
+  <h2 id="tariff-title-el">Выберите<br>подходящий план</h2>
+  <p class="section-sub" id="tariff-sub-el">Безлимитный интернет и цифровое ТВ для всей семьи по доступным ценам. Никаких скрытых платежей.</p>
+
+  <!-- PROMO SLIDER -->
+  <div class="promo-slider reveal">
+    <div class="promo-slides">
+
+      <div class="promo-slide active">
+        <div class="promo-icon">🎉</div>
+        <div class="promo-text">
+          <h3 id="slide1-title">14 тестовых дней бесплатно!</h3>
+          <p id="slide1-desc">Подключись и попробуй — если не понравится, вернём <strong>100% средств</strong>: оборудование, подключение и абонплату.</p>
+        </div>
+      </div>
+
+      <div class="promo-slide">
+        <div class="promo-icon">🏷️</div>
+        <div class="promo-text">
+          <h3 id="slide2-title">Акционный тариф всего 750 сом/мес!</h3>
+          <p id="slide2-desc">Безлимитный интернет со скоростью <strong>до 30 Мбит/с</strong> — самая доступная цена для старта. Ограниченное предложение!</p>
+        </div>
+      </div>
+
+      <div class="promo-slide">
+        <div class="promo-icon">👨‍👩‍👧</div>
+        <div class="promo-text">
+          <h3 id="slide3-title">Приведи друга — получи месяц бесплатно!</h3>
+          <p id="slide3-desc">Порекомендуй Акнет соседу или другу — после его подключения <strong>следующий месяц</strong> для тебя бесплатно.</p>
+        </div>
+      </div>
+
+      <div class="promo-slide">
+        <div class="promo-icon">⚡</div>
+        <div class="promo-text">
+          <h3 id="slide4-title">Бесплатное подключение в ЖК!</h3>
+          <p id="slide4-desc">Подключение в <strong>ЖК Асман 1–6</strong> и <strong>ЖК Элит Таурс</strong> абсолютно бесплатно. Оставь заявку — приедем в удобное время.</p>
+        </div>
+      </div>
+
+
+
+    </div>
+
+    <div class="promo-controls">
+      <button class="promo-prev" onclick="promoSlide(-1)">&#8249;</button>
+      <div class="promo-dots" id="promoDots"></div>
+      <button class="promo-next" onclick="promoSlide(1)">&#8250;</button>
+    </div>
+  </div>
+
+  <div class="promo-banner reveal" style="border-color: rgba(255,180,0,0.4); background: linear-gradient(135deg, rgba(255,150,0,0.12), rgba(255,200,0,0.06));">
+    <div class="promo-icon">🎁</div>
+    <div class="promo-text">
+      <h3 id="golden-title" style="color:#FFB800;">Акция: Бесплатный роутер в подарок!</h3>
+      <p><span id="golden-desc">При оплате <strong style="color:#FFB800;">2 месяцев вперёд</strong> — бесплатно устанавливаем Wi-Fi роутер в ответственное хранение и ТВ приставка по специальной цене <strong style="color:#FFB800;">2 500 сом</strong>. Акция действует на тарифах <strong style="color:#FFB800;">от 990 сом</strong> и выше (Family 1–5).</span></p>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" id="tab-btn-itv" onclick="switchTab('internet-tv')">Интернет + ТВ</button>
+  </div>
+
+  <div class="tab-content active" id="tab-internet-tv">
+    <div class="tariff-grid">
+      <div class="tariff-card reveal" style="border-color: rgba(255,180,0,0.5); background: linear-gradient(135deg, rgba(255,150,0,0.12), rgba(255,200,0,0.06));">
+        <div class="popular-badge" id="start-badge" style="background:#FFB800; color:#000;">🔥 АКЦИЯ</div>
+        <div class="tariff-plan" id="start-plan" style="color:#FFB800;">Start — Акционный</div>
+        <div class="tariff-price" style="color:#FFB800;">750 <sub>сом/мес</sub></div>
+        <div class="tariff-speed" id="speed-start">⚡ до 30 Мбит/с</div>
+        <ul class="tariff-features" id="feats-start">
+          <li id="feat-s1">Безлимитный интернет</li>
+          <li id="feat-s2">Без цифрового ТВ</li>
+          <li id="feat-s3">14 дней тестового периода</li>
+          <li id="feat-s4">Ограниченное предложение</li>
+        </ul>
+        <div style="margin-top:1rem; padding:0.9rem; background:rgba(255,100,0,0.08); border:1px solid rgba(255,150,0,0.25); border-radius:10px; font-size:0.78rem; color:#FFB800; line-height:1.6;">
+          <span id="warn-title">⚠️ <strong>Важные условия тарифа:</strong></span><br>
+          <span id="warn-desc">Подключение по данному тарифу осуществляется <strong>только при наличии собственного Wi-Fi роутера</strong> у абонента. Компания не предоставляет и не устанавливает роутер в рамках тарифа «Start». Убедитесь, что ваше оборудование поддерживает скорость до 30 Мбит/с.</span>
+        </div>
+        <button class="tariff-action" style="background:rgba(255,180,0,0.2); color:#FFB800;" onmouseover="this.style.background='#FFB800';this.style.color='#000'" onmouseout="this.style.background='rgba(255,180,0,0.2)';this.style.color='#FFB800'" onclick="document.getElementById('podklyuchitsya').scrollIntoView({behavior:'smooth'})" id="btn-start">Выбрать тариф</button>
+      </div>
+
+      <div class="tariff-card reveal">
+        <div class="tariff-plan">Family 1</div>
+        <div class="tariff-price">990 <sub>сом/мес</sub></div>
+        <div class="tariff-speed" id="speed-f1">⚡ до 60 Мбит/с</div>
+        <ul class="tariff-features" id="feats-f1">
+          <li id="feat-f1-1">Безлимитный интернет</li>
+          <li id="feat-f1-2">Более 150 телеканалов</li>
+          <li id="feat-f1-3">iTV Акнет включён</li>
+          <li id="feat-f1-4">14 дней тестового периода</li>
+        </ul>
+        <button class="tariff-action" onclick="document.getElementById('podklyuchitsya').scrollIntoView({behavior:'smooth'})" id="btn-f1">Выбрать тариф</button>
+      </div>
+
+      <div class="tariff-card reveal">
+        <div class="tariff-plan">Family 2</div>
+        <div class="tariff-price">1 200 <sub>сом/мес</sub></div>
+        <div class="tariff-speed" id="speed-f2">⚡ до 80 Мбит/с</div>
+        <ul class="tariff-features" id="feats-f2">
+          <li id="feat-f2-1">Безлимитный интернет</li>
+          <li id="feat-f2-2">Более 200 телеканалов</li>
+          <li id="feat-f2-3">iTV Акнет включён</li>
+          <li id="feat-f2-4">14 дней тестового периода</li>
+        </ul>
+        <button class="tariff-action" onclick="document.getElementById('podklyuchitsya').scrollIntoView({behavior:'smooth'})" id="btn-f2">Выбрать тариф</button>
+      </div>
+
+      <div class="tariff-card popular reveal">
+        <div class="popular-badge" id="pop-badge">🔥 ПОПУЛЯРНЫЙ</div>
+        <div class="tariff-plan">Family 3</div>
+        <div class="tariff-price">1 650 <sub>сом/мес</sub></div>
+        <div class="tariff-speed" id="speed-f3">⚡ до 100 Мбит/с</div>
+        <ul class="tariff-features" id="feats-f3">
+          <li id="feat-f3-1">Безлимитный интернет</li>
+          <li id="feat-f3-2">Более 200 телеканалов</li>
+          <li id="feat-f3-3">iTV Акнет включён</li>
+          <li id="feat-f3-4">14 дней тестового периода</li>
+        </ul>
+        <button class="tariff-action" onclick="document.getElementById('podklyuchitsya').scrollIntoView({behavior:'smooth'})" id="btn-f3">Выбрать тариф</button>
+      </div>
+
+      <div class="tariff-card reveal">
+        <div class="tariff-plan">Family 4</div>
+        <div class="tariff-price">2 200 <sub>сом/мес</sub></div>
+        <div class="tariff-speed" id="speed-f4">⚡ до 350 Мбит/с</div>
+        <ul class="tariff-features" id="feats-f4">
+          <li id="feat-f4-1">Безлимитный интернет</li>
+          <li id="feat-f4-2">Более 200 телеканалов</li>
+          <li id="feat-f4-3">iTV Акнет включён</li>
+          <li id="feat-f4-4">14 дней тестового периода</li>
+        </ul>
+        <button class="tariff-action" onclick="document.getElementById('podklyuchitsya').scrollIntoView({behavior:'smooth'})" id="btn-f4">Выбрать тариф</button>
+      </div>
+
+      <div class="tariff-card reveal">
+        <div class="tariff-plan" id="f5-label">Family 5 — Максимум</div>
+        <div class="tariff-price">2 500 <sub>сом/мес</sub></div>
+        <div class="tariff-speed" id="speed-f5">⚡ до 600 Мбит/с</div>
+        <ul class="tariff-features" id="feats-f5">
+          <li id="feat-f5-1">Безлимитный интернет</li>
+          <li id="feat-f5-2">Более 200 телеканалов</li>
+          <li id="feat-f5-3">iTV Акнет включён</li>
+          <li id="feat-f5-4">Самый мощный тариф</li>
+        </ul>
+        <button class="tariff-action" onclick="document.getElementById('podklyuchitsya').scrollIntoView({behavior:'smooth'})" id="btn-f5">Выбрать тариф</button>
+      </div>
+    </div>
+
+    <p id="tariff-note" style="margin-top:1.5rem; font-size:0.82rem; color:var(--gray);">* Цены указаны с учётом всех налогов. Подключение к тарифам 4 и 5 возможно при наличии технической возможности.</p>
+  </div>
+
+
+</section>
+
+<!-- SERVICES -->
+<section id="uslugi">
+  <div class="section-label" id="services-label-el">Что мы предлагаем</div>
+  <h2 id="services-title-el">Наши услуги</h2>
+  <p class="section-sub" id="services-sub-el">Комплексные решения для домашнего интернета и телевидения в городе Манас.</p>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon">🌐</div>
+      <h3 id="svc1-title">Скоростной интернет</h3>
+      <p>Безлимитный высокоскоростной интернет до 600 Мбит/с. Стабильное соединение 24/7 без ограничений трафика.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">📺</div>
+      <h3 id="svc2-title">Цифровое телевидение iTV</h3>
+      <p id="svc2-desc">Более 200 каналов в HD-качестве. Пауза эфира, перемотка, архив передач и родительский контроль.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🏠</div>
+      <h3 id="svc3-title">Бесплатное подключение</h3>
+      <p id="svc3-desc">Подключение в многоквартирных домах абсолютно бесплатно. 14 дней тестового периода — или вернём деньги!</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">📱</div>
+      <h3 id="svc4-title">Чат-поддержка 24/7</h3>
+      <p id="svc4-desc">Поддержка через WhatsApp и Telegram. Быстрая помощь в любое время — 0555 611 004.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🎮</div>
+      <h3 id="svc5-title">Интерактивные функции</h3>
+      <p id="svc5-desc">Прогноз погоды, гороскоп, игры, радио и управление телевизором прямо с экрана ТВ через приставку.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">👨‍👩‍👧</div>
+      <h3 id="svc6-title">Семейные профили</h3>
+      <p id="svc6-desc">Создайте профили ПАПА, МАМА, СЕМЬЯ с персональными списками любимых каналов для каждого члена семьи.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CHANNELS -->
+<section id="kanaly">
+  <div class="section-label" id="channels-label-el">Телевидение</div>
+  <h2 id="channels-title-el">Более 200<br>телеканалов</h2>
+  <p class="section-sub" id="channels-sub-el">В пакете «Семейный плюс» — фильмы, спорт, детские, познавательные и музыкальные каналы на любой вкус.</p>
+
+  <div class="channels-grid reveal">
+    <div class="channel-group">
+      <div class="channel-group-title">🎬 Фильмовые</div>
+      <ul class="channel-list">
+        <li>viju TV1000</li>
+        <li>viju TV1000 русское</li>
+        <li>viju TV1000 action</li>
+        <li>Феникс+Кино</li>
+        <li>Индийское кино</li>
+        <li>Comedy Central</li>
+      </ul>
+    </div>
+    <div class="channel-group">
+      <div class="channel-group-title">🎵 Музыкальные</div>
+      <ul class="channel-list">
+        <li>Europa Plus TV</li>
+        <li>BRIDGE TV</li>
+        <li>TRTMüzik</li>
+      </ul>
+      <div class="channel-group-title" style="margin-top:1rem">📰 Новостные</div>
+      <ul class="channel-list">
+        <li>Россия 24</li>
+        <li>Euronews</li>
+        <li>МИР 24</li>
+      </ul>
+    </div>
+    <div class="channel-group">
+      <div class="channel-group-title">👧 Детские</div>
+      <ul class="channel-list">
+        <li>Nickelodeon</li>
+        <li>Карусель</li>
+        <li>Мультимания</li>
+        <li>Детский</li>
+        <li>TRT Çocuk</li>
+        <li>ОТРК Баластан</li>
+        <li>Da Vinci</li>
+      </ul>
+    </div>
+    <div class="channel-group">
+      <div class="channel-group-title">🌍 Познавательные</div>
+      <ul class="channel-list">
+        <li>National Geographic</li>
+        <li>Nat Geo Wild</li>
+        <li>viju Nature</li>
+        <li>viju History</li>
+        <li>viju Explore</li>
+        <li>Охота и рыбалка</li>
+        <li>Драйв</li>
+        <li>Усадьба</li>
+      </ul>
+    </div>
+    <div class="channel-group">
+      <div class="channel-group-title">⚽ Спортивные</div>
+      <ul class="channel-list">
+        <li>viju+ Sport</li>
+        <li>Satanta Sports 1</li>
+        <li>TRTSpor</li>
+      </ul>
+      <div class="channel-group-title" style="margin-top:1rem">📡 Инфо-развлек.</div>
+      <ul class="channel-list">
+        <li>Первый канал</li>
+        <li>Телеканал Культура</li>
+        <li>УТРК</li>
+        <li>МИР</li>
+        <li>Домашний</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PAYMENT -->
+<section id="oplata">
+  <div class="section-label" id="payment-label-el">Оплата услуг</div>
+  <h2 id="payment-title-el">Удобные<br>способы оплаты</h2>
+  <p class="section-sub" id="payment-sub-el">Оплачивайте услуги любым удобным способом — онлайн или в офисе компании.</p>
+
+  <div class="payment-grid reveal">
+    <div class="payment-card">
+      <div class="payment-icon">🏦</div>
+      <h4 id="pay1-title">Банковская карта</h4>
+      <p id="pay1-desc">Оплата онлайн через личный кабинет billing.tvinosh.kg</p>
+    </div>
+    <div class="payment-card">
+      <div class="payment-icon">🏢</div>
+      <h4 id="pay2-title">Офис компании</h4>
+      <p id="pay2-desc">Наличными или картой в офисе в удобное для вас время</p>
+    </div>
+    <div class="payment-card">
+      <div class="payment-icon">📱</div>
+      <h4 id="pay3-title">Мобильные кошельки</h4>
+      <p id="pay3-desc">Оплата через популярные платёжные системы Кыргызстана</p>
+    </div>
+    <div class="payment-card">
+      <div class="payment-icon">🏪</div>
+      <h4 id="pay4-title">Платёжные терминалы</h4>
+      <p id="pay4-desc">В удобных точках по всему городу Манас</p>
+    </div>
+  </div>
+
+  <div style="margin-top:2rem; padding:1.5rem; background:var(--dark3); border-radius:14px; border:1px solid rgba(0,71,255,0.15);" class="reveal">
+    <p style="font-size:0.9rem; color:var(--gray);">💡 <strong style="color:var(--white)">Личный кабинет:</strong> Проверяйте баланс, историю оплат и управляйте тарифом на сайте <a href="http://billing.tvinosh.kg" style="color:var(--cyan); text-decoration:none;">billing.tvinosh.kg</a></p>
+  </div>
+</section>
+
+<!-- CONNECT FORM -->
+<section id="podklyuchitsya">
+  <div class="connect-grid">
+    <div class="connect-info">
+      <div class="section-label" id="connect-label-el">Подключение</div>
+      <h2 id="connect-title-el">Оставьте<br>заявку</h2>
+      <p class="section-sub" id="connect-sub-el">Наш специалист свяжется с вами в течение часа и ответит на все вопросы.</p>
+
+      <h3 id="contact-title-el">Контакты</h3>
+      <div class="info-block">
+        <div class="info-item">
+          <div class="info-icon">📞</div>
+          <div>
+            <div class="info-label" id="contact-phone-label-el">Телефон / WhatsApp</div>
+            <div class="info-value">0555 611 004</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">📍</div>
+          <div>
+            <div class="info-label" id="contact-zone-label-el">Зона обслуживания</div>
+            <div class="info-value" id="contact-zone-val1-el">г. Манас — ЖК Асман 1, 2, 3, 4, 5, 6</div>
+            <div class="info-value" id="contact-zone-val2-el">ЖК Элит Таурс</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">🕐</div>
+          <div>
+            <div class="info-label" id="contact-hours-label-el">Режим работы</div>
+            <div class="info-value" id="contact-hours1-el">Пн–Пт: 8:00–17:00</div>
+            <div class="info-value" id="contact-hours2-el">Сб–Вс: выходной</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-item">
+          <div class="info-icon">✉️</div>
+          <div>
+            <div class="info-label" id="contact-email-label-el">Коммерческий блок</div>
+            <div class="info-value">sales@aknet.kg</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">🛠️</div>
+          <div>
+            <div class="info-label" id="contact-support-label-el">Техническая поддержка</div>
+            <div class="info-value">support@aknet.kg</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card reveal" id="kontakty">
+      <h3 id="form-title-el">Хочу подключиться</h3>
+      <div id="formContainer">
+        <div class="form-group">
+          <label id="form-name-label">Ваше имя</label>
+          <input type="text" placeholder="Иван Иванов" id="fname">
+        </div>
+        <div class="form-group">
+          <label id="form-phone-label">Телефон</label>
+          <input type="tel" placeholder="+996 (___) ___ ___" id="fphone">
+        </div>
+        <div class="form-group">
+          <label id="form-address-label">Адрес подключения</label>
+          <input type="text" placeholder="г. Манас, ул. Примерная, д. 1, кв. 2" id="faddress">
+        </div>
+        <div class="form-group">
+          <label id="form-tariff-label">Интересующий тариф</label>
+          <select id="ftariff">
+            <option value="">— Выберите тариф —</option>
+            <option>Start (Акция) — до 30 Мбит/с · 750 сом</option>
+            <option>Family 1 — до 60 Мбит/с · 990 сом</option>
+            <option>Family 2 — до 80 Мбит/с · 1200 сом</option>
+            <option>Family 3 — до 100 Мбит/с · 1650 сом</option>
+            <option>Family 4 — до 350 Мбит/с · 2200 сом</option>
+            <option>Family 5 — до 600 Мбит/с · 2500 сом</option>
+
+          </select>
+        </div>
+        <div class="form-group">
+          <label id="form-comment-label">Комментарий (необязательно)</label>
+          <textarea placeholder="Дополнительная информация..." id="fcomment"></textarea>
+        </div>
+        <button class="form-submit" id="form-submit-el" onclick="submitForm()">🚀 Отправить заявку</button>
+      </div>
+      <div class="form-success" id="formSuccess">
+        <div style="font-size:2.5rem;margin-bottom:1rem">✅</div>
+        <h3 id="form-success-title-el" style="font-family:'Unbounded',sans-serif;margin-bottom:0.5rem">Заявка принята!</h3>
+        <p id="form-success-sub-el" style="color:var(--gray);font-size:0.9rem">Наш менеджер свяжется с вами в ближайшее время.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="logo"><img src="data:image/png;base64,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" alt="Акнет" style="height:38px; width:auto; display:block;"></a>
+      <p id="footer-desc-el">Ведущий провайдер интернета и цифрового телевидения в Кыргызстане. Работаем с 1998 года.</p>
+      <div class="footer-phones">
+        <a href="tel:+996555611004">0555 611 004</a>
+      </div>
+      <div id="footer-location-el" style="margin-top:0.8rem; font-size:0.85rem; color:var(--gray);">📍 г. Манас<br>ЖК Асман 1–6, ЖК Элит Таурс</div>
+    </div>
+
+
+
+
+  </div>
+  <div class="footer-bottom">
+    <p id="footer-copy-el">© 2025 Акнет, г. Манас. Лиц. ГАС №17-0110 КР · Лиц. ГАС №00-110 КР</p>
+    <div class="social-links">
+      <a href="https://instagram.com/aknet_official" title="Instagram">📸</a>
+      <a href="https://facebook.com/aknetkg" title="Facebook">👍</a>
+      <a href="https://t.me/aknet" title="Telegram">✈️</a>
+      <a href="https://vk.com/itv_aknet" title="ВКонтакте">🔵</a>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/996555611004" class="float-wa" title="WhatsApp поддержка">💬</a>
+
+<script>
+  // Promo Slider
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.promo-slide');
+  const dotsContainer = document.getElementById('promoDots');
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'promo-dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => goToSlide(i);
+    dotsContainer.appendChild(dot);
+  });
+
+  function goToSlide(n) {
+    slides[currentSlide].classList.remove('active');
+    dotsContainer.children[currentSlide].classList.remove('active');
+    currentSlide = (n + slides.length) % slides.length;
+    slides[currentSlide].classList.add('active');
+    dotsContainer.children[currentSlide].classList.add('active');
+  }
+
+  function promoSlide(dir) { goToSlide(currentSlide + dir); }
+
+  setInterval(() => promoSlide(1), 4000);
+
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('active');
+  }
+
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('active');
+  }
+
+  // Tab switching
+  function switchTab(tab) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById('tab-' + tab).classList.add('active');
+  }
+
+  // Form submit → WhatsApp
+  function submitForm() {
+    const name = document.getElementById('fname').value.trim();
+    const phone = document.getElementById('fphone').value.trim();
+    const address = document.getElementById('faddress').value.trim();
+    const tariff = document.getElementById('ftariff').value;
+    const comment = document.getElementById('fcomment').value.trim();
+
+    if (!name || !phone) {
+      alert('Пожалуйста, заполните имя и телефон.');
+      return;
+    }
+
+    const msg =
+      '📋 *Новая заявка с сайта*%0A' +
+      '━━━━━━━━━━━━━━━━━━%0A' +
+      '👤 *Имя:* ' + name + '%0A' +
+      '📞 *Телефон:* ' + phone + '%0A' +
+      (address ? '📍 *Адрес:* ' + address + '%0A' : '') +
+      (tariff ? '📦 *Тариф:* ' + tariff + '%0A' : '') +
+      (comment ? '💬 *Комментарий:* ' + comment + '%0A' : '') +
+      '━━━━━━━━━━━━━━━━━━';
+
+    window.open('https://wa.me/996555611004?text=' + msg, '_blank');
+
+    document.getElementById('formContainer').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+
+  // ===== LANGUAGE SYSTEM =====
+  const translations = {
+    ru: {
+      // Hero
+      'hero-badge': '🌐 г. Манас — Кыргызстан',
+      'hero-title': 'Интернет<br>и <span class="accent">цифровое ТВ</span><br>в г. Манас',
+      'hero-sub': 'Высокоскоростной безлимитный интернет до 600 Мбит/с и более 200 цифровых телеканалов для всей семьи. Подключение в ЖК Асман и ЖК Элит Таурс!',
+      'hero-btn1': '🚀 Подключиться',
+      'hero-btn2': 'Смотреть тарифы',
+      'stat-label1': 'Максимальная скорость',
+      'stat-label2': 'Телеканалов',
+      'stat-label3': 'На рынке Кыргызстана',
+      // Sections
+      'tariff-label': 'Наши тарифы',
+      'tariff-title': 'Выберите<br>подходящий план',
+      'tariff-sub': 'Безлимитный интернет и цифровое ТВ для всей семьи по доступным ценам. Никаких скрытых платежей.',
+      'services-label': 'Что мы предлагаем',
+      'services-title': 'Наши услуги',
+      'services-sub': 'Комплексные решения для домашнего интернета и телевидения в городе Манас.',
+      'channels-label': 'Телевидение',
+      'channels-title': 'Более 200<br>телеканалов',
+      'channels-sub': 'В пакете «Семейный плюс» — фильмы, спорт, детские, познавательные и музыкальные каналы на любой вкус.',
+      'payment-label': 'Оплата услуг',
+      'payment-title': 'Удобные<br>способы оплаты',
+      'payment-sub': 'Оплачивайте услуги любым удобным способом — онлайн или в офисе компании.',
+      'connect-label': 'Подключение',
+      'connect-title': 'Оставьте<br>заявку',
+      'connect-sub': 'Наш специалист свяжется с вами в течение часа и ответит на все вопросы.',
+      // Form
+      'form-title': 'Хочу подключиться',
+      'form-name': 'Ваше имя',
+      'form-name-ph': 'Иван Иванов',
+      'form-phone': 'Телефон',
+      'form-address': 'Адрес подключения',
+      'form-address-ph': 'г. Манас, ЖК Асман 3, кв. 10',
+      'form-tariff': 'Интересующий тариф',
+      'form-comment': 'Комментарий (необязательно)',
+      'form-comment-ph': 'Дополнительная информация...',
+      'form-submit': '🚀 Отправить заявку',
+      'form-success-title': 'Заявка принята!',
+      'form-success-sub': 'Наш менеджер свяжется с вами в ближайшее время.',
+      // Contact
+      'contact-title': 'Контакты',
+      'contact-phone-label': 'Телефон / WhatsApp',
+      'contact-zone-label': 'Зона обслуживания',
+      'contact-zone-val1': 'г. Манас — ЖК Асман 1, 2, 3, 4, 5, 6',
+      'contact-zone-val2': 'ЖК Элит Таурс',
+      'contact-hours-label': 'Режим работы',
+      'contact-hours1': 'Пн–Пт: 8:00–17:00',
+      'contact-hours2': 'Сб–Вс: выходной',
+      'contact-email-label': 'Коммерческий блок',
+      'contact-support-label': 'Техническая поддержка',
+      // Speeds
+      'speed-start': '⚡ до 30 Мбит/с', 'speed-f1': '⚡ до 60 Мбит/с',
+      'speed-f2': '⚡ до 80 Мбит/с', 'speed-f3': '⚡ до 100 Мбит/с',
+      'speed-f4': '⚡ до 350 Мбит/с', 'speed-f5': '⚡ до 600 Мбит/с',
+      // Tariff features
+      'feat-s1': 'Безлимитный интернет', 'feat-s2': 'Без цифрового ТВ',
+      'feat-s3': '14 дней тестового периода', 'feat-s4': 'Ограниченное предложение',
+      'feat-f1-1': 'Безлимитный интернет', 'feat-f1-2': 'Более 150 телеканалов',
+      'feat-f1-3': 'iTV Акнет включён', 'feat-f1-4': '14 дней тестового периода',
+      'feat-f2-1': 'Безлимитный интернет', 'feat-f2-2': 'Более 200 телеканалов',
+      'feat-f2-3': 'iTV Акнет включён', 'feat-f2-4': '14 дней тестового периода',
+      'feat-f3-1': 'Безлимитный интернет', 'feat-f3-2': 'Более 200 телеканалов',
+      'feat-f3-3': 'iTV Акнет включён', 'feat-f3-4': '14 дней тестового периода',
+      'feat-f4-1': 'Безлимитный интернет', 'feat-f4-2': 'Более 200 телеканалов',
+      'feat-f4-3': 'iTV Акнет включён', 'feat-f4-4': '14 дней тестового периода',
+      'feat-f5-1': 'Безлимитный интернет', 'feat-f5-2': 'Более 200 телеканалов',
+      'feat-f5-3': 'iTV Акнет включён', 'feat-f5-4': 'Самый мощный тариф',
+      // Tariffs & Promos
+      'tab-itv': 'Интернет + ТВ',
+      'start-plan': 'Start — Акционный',
+      'start-badge': '🔥 АКЦИЯ',
+      'pop-badge': '🔥 ПОПУЛЯРНЫЙ',
+      'f5-label': 'Family 5 — Максимум',
+      'btn-start': 'Выбрать тариф', 'btn-f1': 'Выбрать тариф', 'btn-f2': 'Выбрать тариф',
+      'btn-f3': 'Выбрать тариф', 'btn-f4': 'Выбрать тариф', 'btn-f5': 'Выбрать тариф',
+      'tariff-note': '* Цены указаны с учётом всех налогов. Подключение к тарифам 4 и 5 возможно при наличии технической возможности.',
+      'slide1-title': '14 тестовых дней бесплатно!',
+      'slide1-desc': 'Подключись и попробуй — если не понравится, вернём <strong>100% средств</strong>: оборудование, подключение и абонплату.',
+      'slide2-title': 'Акционный тариф всего 750 сом/мес!',
+      'slide2-desc': 'Безлимитный интернет со скоростью <strong>до 30 Мбит/с</strong> — самая доступная цена для старта. Ограниченное предложение!',
+      'slide3-title': 'Приведи друга — получи месяц бесплатно!',
+      'slide3-desc': 'Порекомендуй Акнет соседу или другу — после его подключения <strong>следующий месяц</strong> для тебя бесплатно.',
+      'slide4-title': 'Бесплатное подключение в ЖК!',
+      'slide4-desc': 'Подключение в <strong>ЖК Асман 1–6</strong> и <strong>ЖК Элит Таурс</strong> абсолютно бесплатно. Оставь заявку — приедем в удобное время.',
+      'golden-title': 'Акция: Бесплатный роутер в подарок!',
+      'golden-desc': 'При оплате <strong style="color:#FFB800;">2 месяцев вперёд</strong> — бесплатно устанавливаем Wi-Fi роутер в ответственное хранение и ТВ приставка по специальной цене <strong style="color:#FFB800;">2 500 сом</strong>. Акция действует на тарифах <strong style="color:#FFB800;">от 990 сом</strong> и выше (Family 1–5).',
+      'warn-title': '⚠️ <strong>Важные условия тарифа:</strong>',
+      'warn-desc': 'Подключение по данному тарифу осуществляется <strong>только при наличии собственного Wi-Fi роутера</strong> у абонента. Компания не предоставляет и не устанавливает роутер в рамках тарифа «Start». Убедитесь, что ваше оборудование поддерживает скорость до 30 Мбит/с.',
+      // Services
+      'svc1-title': 'Скоростной интернет',
+      'svc1-desc': 'Безлимитный высокоскоростной интернет до 600 Мбит/с. Стабильное соединение 24/7 без ограничений трафика.',
+      'svc2-title': 'Цифровое телевидение iTV',
+      'svc2-desc': 'Более 200 каналов в HD-качестве. Пауза эфира, перемотка, архив передач и родительский контроль.',
+      'svc3-title': 'Бесплатное подключение',
+      'svc3-desc': 'Подключение в многоквартирных домах абсолютно бесплатно. 14 дней тестового периода — или вернём деньги!',
+      'svc4-title': 'Чат-поддержка 24/7',
+      'svc4-desc': 'Поддержка через WhatsApp и Telegram. Быстрая помощь в любое время — 0555 611 004.',
+      'svc5-title': 'Интерактивные функции',
+      'svc5-desc': 'Прогноз погоды, гороскоп, игры, радио и управление телевизором прямо с экрана ТВ через приставку.',
+      'svc6-title': 'Семейные профили',
+      'svc6-desc': 'Создайте профили ПАПА, МАМА, СЕМЬЯ с персональными списками любимых каналов для каждого члена семьи.',
+      // Payments
+      'pay1-title': 'Банковская карта',
+      'pay1-desc': 'Оплата онлайн через личный кабинет billing.tvinosh.kg',
+      'pay2-title': 'Офис компании',
+      'pay2-desc': 'Наличными или картой в офисе в удобное для вас время',
+      'pay3-title': 'Мобильные кошельки',
+      'pay3-desc': 'Оплата через популярные платёжные системы Кыргызстана',
+      'pay4-title': 'Платёжные терминалы',
+      'pay4-desc': 'В удобных точках по всему городу Манас',
+      // Footer
+      'footer-desc': 'Ведущий провайдер интернета и цифрового телевидения в Кыргызстане. Работаем с 1998 года.',
+      'footer-location': 'г. Манас<br>ЖК Асман 1–6, ЖК Элит Таурс',
+      'footer-copy': '© 2025 Акнет, г. Манас. Лиц. ГАС №17-0110 КР · Лиц. ГАС №00-110 КР',
+      // Mobile menu
+      'mob-connect': 'Подключиться',
+    },
+    ky: {
+      // Hero
+      'hero-badge': '🌐 Манас ш. — Кыргызстан',
+      'hero-title': 'Интернет<br>жана <span class="accent">санарип ТВ</span><br>Манас шаарында',
+      'hero-sub': 'Үй-бүлөңүз үчүн секундасына 600 Мбит/сге чейин ылдам чексиз интернет жана 200дөн ашык санарип телеканал. Асман ЖК жана Элит Таурс ЖК туташтыруу!',
+      'hero-btn1': '🚀 Туташуу',
+      'hero-btn2': 'Тарифтерди көрүү',
+      'stat-label1': 'Максималдуу ылдамдык',
+      'stat-label2': 'Телеканалдар',
+      'stat-label3': 'Кыргызстан рыногунда',
+      // Sections
+      'tariff-label': 'Биздин тарифтер',
+      'tariff-title': 'Ылайыктуу план<br>тандаңыз',
+      'tariff-sub': 'Үй-бүлө үчүн жашырын төлөмсүз жеткиликтүү баада чексиз интернет жана санарип ТВ.',
+      'services-label': 'Эмне сунуштайбыз',
+      'services-title': 'Биздин кызматтар',
+      'services-sub': 'Манас шаарындагы үй интернети жана телевидениесине комплекстүү чечимдер.',
+      'channels-label': 'Телевидение',
+      'channels-title': '200дөн ашык<br>телеканал',
+      'channels-sub': '«Үй-бүлөлүк плюс» пакетинде — кино, спорт, балдар, таанып-билүү жана музыкалык каналдар.',
+      'payment-label': 'Кызматтарды төлөө',
+      'payment-title': 'Ыңгайлуу<br>төлөм ыкмалары',
+      'payment-sub': 'Кызматтарды каалаган ыңгайлуу ыкма менен төлөңүз — онлайн же компания кеңсесинде.',
+      'connect-label': 'Туташуу',
+      'connect-title': 'Арыз<br>калтырыңыз',
+      'connect-sub': 'Биздин адис бир саат ичинде байланышып, бардык суроолорго жооп берет.',
+      // Form
+      'form-title': 'Туташкым келет',
+      'form-name': 'Атыңыз',
+      'form-name-ph': 'Азамат Асанов',
+      'form-phone': 'Телефон',
+      'form-address': 'Туташуу дареги',
+      'form-address-ph': 'Манас ш., Асман 3 ЖК, 10 кв.',
+      'form-tariff': 'Кызыккан тариф',
+      'form-comment': 'Комментарий (милдеттүү эмес)',
+      'form-comment-ph': 'Кошумча маалымат...',
+      'form-submit': '🚀 Арыз жөнөтүү',
+      'form-success-title': 'Арыз кабыл алынды!',
+      'form-success-sub': 'Менеджерибиз жакын арада байланышат.',
+      // Contact
+      'contact-title': 'Байланыш',
+      'contact-phone-label': 'Телефон / WhatsApp',
+      'contact-zone-label': 'Тейлөө аймагы',
+      'contact-zone-val1': 'Манас ш. — Асман 1, 2, 3, 4, 5, 6 ЖК',
+      'contact-zone-val2': 'Элит Таурс ЖК',
+      'contact-hours-label': 'Иш убактысы',
+      'contact-hours1': 'Дүй–Жума: 8:00–17:00',
+      'contact-hours2': 'Ишемби–Жекшемби: эс күн',
+      'contact-email-label': 'Коммерциялык бөлүм',
+      'contact-support-label': 'Техникалык колдоо',
+      // Speeds
+      'speed-start': '⚡ 30 Мбит/сге чейин', 'speed-f1': '⚡ 60 Мбит/сге чейин',
+      'speed-f2': '⚡ 80 Мбит/сге чейин', 'speed-f3': '⚡ 100 Мбит/сге чейин',
+      'speed-f4': '⚡ 350 Мбит/сге чейин', 'speed-f5': '⚡ 600 Мбит/сге чейин',
+      // Tariff features
+      'feat-s1': 'Чексиз интернет', 'feat-s2': 'Санарип ТВсиз',
+      'feat-s3': '14 күн сыноо мезгили', 'feat-s4': 'Чектелген сунуш',
+      'feat-f1-1': 'Чексиз интернет', 'feat-f1-2': '150дөн ашык телеканал',
+      'feat-f1-3': 'iTV Акнет кирет', 'feat-f1-4': '14 күн сыноо мезгили',
+      'feat-f2-1': 'Чексиз интернет', 'feat-f2-2': '200дөн ашык телеканал',
+      'feat-f2-3': 'iTV Акнет кирет', 'feat-f2-4': '14 күн сыноо мезгили',
+      'feat-f3-1': 'Чексиз интернет', 'feat-f3-2': '200дөн ашык телеканал',
+      'feat-f3-3': 'iTV Акнет кирет', 'feat-f3-4': '14 күн сыноо мезгили',
+      'feat-f4-1': 'Чексиз интернет', 'feat-f4-2': '200дөн ашык телеканал',
+      'feat-f4-3': 'iTV Акнет кирет', 'feat-f4-4': '14 күн сыноо мезгили',
+      'feat-f5-1': 'Чексиз интернет', 'feat-f5-2': '200дөн ашык телеканал',
+      'feat-f5-3': 'iTV Акнет кирет', 'feat-f5-4': 'Эң күчтүү тариф',
+      // Tariffs & Promos
+      'tab-itv': 'Интернет + ТВ',
+      'start-plan': 'Start — Акциялык',
+      'start-badge': '🔥 АКЦИЯ',
+      'pop-badge': '🔥 ПОПУЛЯРДУУ',
+      'f5-label': 'Family 5 — Максималдуу',
+      'btn-start': 'Тарифти тандоо', 'btn-f1': 'Тарифти тандоо', 'btn-f2': 'Тарифти тандоо',
+      'btn-f3': 'Тарифти тандоо', 'btn-f4': 'Тарифти тандоо', 'btn-f5': 'Тарифти тандоо',
+      'tariff-note': '* Баалар бардык салыктарды эске алуу менен көрсөтүлгөн. 4 жана 5 тарифтерге туташуу техникалык мүмкүнчүлүк болгондо жүргүзүлөт.',
+      'slide1-title': '14 сыноо күнү бекер!',
+      'slide1-desc': 'Туташып көрүңүз — жакпаса, <strong>100% акчаңызды кайтарабыз</strong>: жабдуу, туташтыруу жана абонплата.',
+      'slide2-title': 'Акциялык тариф 750 сомдон!',
+      'slide2-desc': '<strong>30 Мбит/сге чейин</strong> ылдамдыктагы чексиз интернет — баштоо үчүн эң жеткиликтүү баа. Чектелген сунуш!',
+      'slide3-title': 'Досту чакыр — бир ай бекер ал!',
+      'slide3-desc': 'Акнетти кошунаңызга же досуңузга сунуштаңыз — ал туташкандан кийин <strong>кийинки ай</strong> сиз үчүн бекер.',
+      'slide4-title': 'ЖКда бекер туташтыруу!',
+      'slide4-desc': '<strong>Асман 1–6 ЖК</strong> жана <strong>Элит Таурс ЖК</strong>га туташтыруу акысыз. Арыз калтырыңыз — ыңгайлуу убакта келебиз.',
+      'golden-title': 'Акция: Роутер белекке!',
+      'golden-desc': '<strong style="color:#FFB800;">2 айга алдын ала</strong> төлөгөндө — Wi-Fi роутерди жооптуу сактоого бекер орнотобуз жана ТВ приставка атайын баада <strong style="color:#FFB800;">2 500 сом</strong>. Акция <strong style="color:#FFB800;">990 сомдон</strong> жогору тарифтерде колдонулат (Family 1–5).',
+      'warn-title': '⚠️ <strong>Тарифтин маанилүү шарттары:</strong>',
+      'warn-desc': 'Бул тариф боюнча туташуу <strong>абоненттин өз Wi-Fi роутери болгондо гана</strong> жүргүзүлөт. Компания «Start» тарифи боюнча роутер бербейт жана орнотпойт. Жабдууңуз 30 Мбит/сге чейин ылдамдыкты колдойорун текшериңиз.',
+      // Services
+      'svc1-title': 'Ылдам интернет',
+      'svc1-desc': '600 Мбит/сге чейин чексиз жогорку ылдамдыктагы интернет. Трафик чектөөсүз 24/7 туруктуу байланыш.',
+      'svc2-title': 'iTV санарип телевидениесы',
+      'svc2-desc': 'HD сапатта 200дөн ашык канал. Эфирди токтотуу, артка сүрүү, берүүлөр архиви жана ата-эне контролу.',
+      'svc3-title': 'Бекер туташтыруу',
+      'svc3-desc': 'Көп бөлмөлүү үйлөрдө туташтыруу акысыз. 14 күн сыноо мезгили — же акчаны кайтарып беребиз!',
+      'svc4-title': 'Чат-колдоо 24/7',
+      'svc4-desc': 'WhatsApp жана Telegram аркылуу колдоо. Каалаган убакта тез жардам — 0555 611 004.',
+      'svc5-title': 'Интерактивдик функциялар',
+      'svc5-desc': 'Аба ырайы, гороскоп, оюндар, радио жана ТВ башкаруу — баары ТВ экранынан приставка аркылуу.',
+      'svc6-title': 'Үй-бүлөлүк профилдер',
+      'svc6-desc': 'ЭЖЕ, АКЕ, ҮЙ-БҮЛӨ профилдерин жасаңыз — үй-бүлөнүн ар бир мүчөсү үчүн каналдардын жеке тизмеси.',
+      // Payments
+      'pay1-title': 'Банк картасы',
+      'pay1-desc': 'billing.tvinosh.kg жеке кабинети аркылуу онлайн төлөм',
+      'pay2-title': 'Компания кеңсеси',
+      'pay2-desc': 'Сизге ыңгайлуу убакта кеңседе нак же карта менен',
+      'pay3-title': 'Мобилдик капчыктар',
+      'pay3-desc': 'Кыргызстандын популярдуу төлөм системалары аркылуу',
+      'pay4-title': 'Төлөм терминалдары',
+      'pay4-desc': 'Манас шаары боюнча ыңгайлуу жерлерде',
+      // Footer
+      'footer-desc': 'Кыргызстандагы интернет жана санарип телевидениенин жетекчи провайдери. 1998-жылдан бери иштейбиз.',
+      'footer-location': 'Манас ш.<br>Асман 1–6 ЖК, Элит Таурс ЖК',
+      'footer-copy': '© 2025 Акнет, Манас ш. Лиц. ГАС №17-0110 КР · Лиц. ГАС №00-110 КР',
+      // Mobile menu
+      'mob-connect': 'Туташуу',
+    }
+  };
+
+  function setLang(lang) {
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+    const t = translations[lang];
+
+    // Helper
+    const set = (id, html) => { const el = document.getElementById(id); if(el) el.innerHTML = html; };
+    const setText = (id, txt) => { const el = document.getElementById(id); if(el && txt !== undefined) el.textContent = txt; };
+    const setHTML = (id, html) => { const el = document.getElementById(id); if(el && html !== undefined) el.innerHTML = html; };
+    const setPh = (id, txt) => { const el = document.getElementById(id); if(el) el.placeholder = txt; };
+
+    set('hero-badge-el', t['hero-badge']);
+    set('hero-title-el', t['hero-title']);
+    set('hero-sub-el', t['hero-sub']);
+    set('hero-btn1-el', t['hero-btn1']);
+    set('hero-btn2-el', t['hero-btn2']);
+    document.querySelectorAll('.stat-label').forEach((el,i) => {
+      el.textContent = t[`stat-label${i+1}`];
+    });
+    set('tariff-label-el', t['tariff-label']);
+    set('tariff-title-el', t['tariff-title']);
+    set('tariff-sub-el', t['tariff-sub']);
+    set('services-label-el', t['services-label']);
+    set('services-title-el', t['services-title']);
+    set('services-sub-el', t['services-sub']);
+    set('channels-label-el', t['channels-label']);
+    set('channels-title-el', t['channels-title']);
+    set('channels-sub-el', t['channels-sub']);
+    set('payment-label-el', t['payment-label']);
+    set('payment-title-el', t['payment-title']);
+    set('payment-sub-el', t['payment-sub']);
+    set('connect-label-el', t['connect-label']);
+    set('connect-title-el', t['connect-title']);
+    set('connect-sub-el', t['connect-sub']);
+    set('form-title-el', t['form-title']);
+    setText('form-name-label', t['form-name']);
+    setPh('fname', t['form-name-ph']);
+    setText('form-phone-label', t['form-phone']);
+    setText('form-address-label', t['form-address']);
+    setPh('faddress', t['form-address-ph']);
+    setText('form-tariff-label', t['form-tariff']);
+    setText('form-comment-label', t['form-comment']);
+    setPh('fcomment', t['form-comment-ph']);
+    set('form-submit-el', t['form-submit']);
+    set('form-success-title-el', t['form-success-title']);
+    set('form-success-sub-el', t['form-success-sub']);
+    set('contact-title-el', t['contact-title']);
+    setText('contact-phone-label-el', t['contact-phone-label']);
+    setText('contact-zone-label-el', t['contact-zone-label']);
+    setText('contact-zone-val1-el', t['contact-zone-val1']);
+    setText('contact-zone-val2-el', t['contact-zone-val2']);
+    setText('contact-hours-label-el', t['contact-hours-label']);
+    setText('contact-hours1-el', t['contact-hours1']);
+    setText('contact-hours2-el', t['contact-hours2']);
+    setText('contact-email-label-el', t['contact-email-label']);
+    setText('contact-support-label-el', t['contact-support-label']);
+    set('footer-desc-el', t['footer-desc']);
+    set('footer-location-el', t['footer-location']);
+    set('footer-copy-el', t['footer-copy']);
+    set('mob-connect-el', t['mob-connect']);
+
+    // Speeds
+    ['start','f1','f2','f3','f4','f5'].forEach(id => setText(`speed-${id}`, t[`speed-${id}`]));
+
+    // Tariff features
+    ['s','f1','f2','f3','f4','f5'].forEach(card => {
+      [1,2,3,4].forEach(n => {
+        const key = card === 's' ? `feat-s${n}` : `feat-${card}-${n}`;
+        setText(key, t[key]);
+      });
+    });
+
+    // Tariffs & Promos
+    set('tab-btn-itv', t['tab-itv']);
+    set('start-plan', t['start-plan']);
+    set('start-badge', t['start-badge']);
+    set('pop-badge', t['pop-badge']);
+    set('f5-label', t['f5-label']);
+    ['start','f1','f2','f3','f4','f5'].forEach(id => set(`btn-${id}`, t[`btn-${id}`]));
+    set('tariff-note', t['tariff-note']);
+    set('slide1-title', t['slide1-title']); set('slide1-desc', t['slide1-desc']);
+    set('slide2-title', t['slide2-title']); set('slide2-desc', t['slide2-desc']);
+    set('slide3-title', t['slide3-title']); set('slide3-desc', t['slide3-desc']);
+    set('slide4-title', t['slide4-title']); set('slide4-desc', t['slide4-desc']);
+    set('golden-title', t['golden-title']); set('golden-desc', t['golden-desc']);
+    set('warn-title', t['warn-title']); set('warn-desc', t['warn-desc']);
+
+    // Services
+    for(let i=1; i<=6; i++) {
+      set(`svc${i}-title`, t[`svc${i}-title`]);
+      set(`svc${i}-desc`, t[`svc${i}-desc`]);
+    }
+    // Payments
+    for(let i=1; i<=4; i++) {
+      set(`pay${i}-title`, t[`pay${i}-title`]);
+      set(`pay${i}-desc`, t[`pay${i}-desc`]);
+    }
+
+    // Nav links
+    document.querySelectorAll('[data-ru]').forEach(el => {
+      el.textContent = t === translations.ru ? el.dataset.ru : el.dataset.ky;
+    });
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 50) {
+      nav.style.background = 'rgba(5,7,26,0.97)';
+    } else {
+      nav.style.background = 'rgba(5,7,26,0.85)';
+    }
+  });
+</script>
+</body>
+</html>
