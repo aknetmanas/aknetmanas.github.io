@@ -18,6 +18,9 @@
     .ph  { font-size: 12px; padding: 6px 10px; }
     .bo-btn { font-size: 12px; padding: 6px 12px; }
 
+    /* Hero — сдвигаем картинку чуть правее, видна девушка */
+    .hero { background-position-x: 60% !important; }
+
     /* Hero */
     .hero-in { gap: 24px; }
     .hero h1 { font-size: 30px; }
@@ -56,7 +59,11 @@
     .logo img { height: 28px; }
 
     /* ── Hero ── */
-    .hero { padding: 36px 16px 44px; }
+    /* На мобильном показываем правую часть баннера (девушка) */
+    .hero {
+        padding: 36px 16px 44px;
+        background-position: 75% bottom !important;
+    }
     .hero-in { grid-template-columns: 1fr; gap: 28px; }
     .hero h1 { font-size: 26px; }
     .hero p  { font-size: 14px; max-width: 100%; }
