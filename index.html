@@ -1,325 +1,44 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" id="html-root">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Ведущий интернет-провайдер Кыргызстана — быстрый интернет и Цифровое ТВ">
+<meta name="author" content="АКНЕТ">
+<title>АКНЕТ — Интернет и Цифровое ТВ в Кыргызстане</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --blue:#0057B8;--bd:#003d82;--bl:#e8f0fb;--sky:#00AEEF;
-  --orange:#F7941D;--tx:#1a1a2e;--mu:#6b7280;--bo:#e5e7eb;
-  --bg:#f8fafc;--wh:#fff;--r:12px;--sh:0 4px 24px rgba(0,87,184,.10)
-}
-body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--tx);font-size:15px;line-height:1.6}
-
-/* NAV */
-header{background:var(--wh);border-bottom:1.5px solid var(--bo);position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(0,87,184,.07)}
-.hi{max-width:1100px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:64px}
-.logo{display:flex;align-items:center;gap:8px;text-decoration:none}
-.logo img{height:34px;object-fit:contain}
-.logo-fb{font-size:24px;font-weight:800;color:var(--blue);letter-spacing:-1px;display:none}
-nav{display:flex;gap:4px}
-nav button{border:none;background:none;color:var(--mu);font-weight:600;font-size:13px;padding:7px 12px;border-radius:8px;cursor:pointer;font-family:inherit;transition:all .2s}
-nav button:hover,nav button.active{background:var(--bl);color:var(--blue)}
-.ha{display:flex;align-items:center;gap:10px}
-.ph{background:var(--bl);color:var(--blue);padding:7px 13px;border-radius:8px;font-weight:700;font-size:13px;white-space:nowrap}
-.bo-btn{border:1.5px solid var(--blue);color:var(--blue);background:transparent;padding:7px 16px;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer;transition:all .2s;font-family:inherit}
-.bo-btn:hover{background:var(--blue);color:#fff}
-
-/* PAGES */
-.page{display:none}
-.page.active{display:block}
-
-/* TICKER */
-.ticker{background:var(--blue);color:#fff;padding:9px 0;overflow:hidden}
-.ticker-track{display:flex;gap:48px;animation:tick 22s linear infinite}
-@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.ti{white-space:nowrap;font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px}
-.td{width:6px;height:6px;border-radius:50%;background:var(--orange);flex-shrink:0}
-
-/* HERO */
-.hero{background:linear-gradient(135deg,#003d82 0%,#0057B8 55%,#00AEEF 100%);color:#fff;padding:64px 20px 72px;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;right:-80px;top:-80px;width:380px;height:380px;border-radius:50%;background:rgba(255,255,255,.05)}
-.hero::after{content:'';position:absolute;right:60px;bottom:-100px;width:240px;height:240px;border-radius:50%;background:rgba(0,174,239,.14)}
-.hero-in{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;position:relative;z-index:2}
-.hbadge{display:inline-block;background:rgba(247,148,29,.2);border:1px solid rgba(247,148,29,.4);color:#fbbf24;font-size:11px;font-weight:700;padding:4px 13px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase}
-.hero h1{font-size:38px;font-weight:800;line-height:1.15;margin-bottom:16px}
-.hero h1 span{color:#F7941D}
-.hero p{font-size:16px;opacity:.88;margin-bottom:28px;max-width:420px}
-.hbtns{display:flex;gap:12px;flex-wrap:wrap}
-.btn-p{background:var(--orange);color:#fff;border:none;padding:13px 26px;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;transition:all .2s;font-family:inherit;box-shadow:0 4px 16px rgba(247,148,29,.3)}
-.btn-p:hover{background:#e67e00;transform:translateY(-1px)}
-.btn-w{background:#fff;color:var(--blue);border:none;padding:13px 26px;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;transition:all .2s;font-family:inherit}
-.btn-w:hover{background:var(--bl);transform:translateY(-1px)}
-.hcard{background:rgba(255,255,255,.12);backdrop-filter:blur(12px);border:1.5px solid rgba(255,255,255,.25);border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:14px}
-.hstat{display:flex;align-items:center;gap:12px}
-.sico{width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
-.sval{font-size:20px;font-weight:800}
-.slbl{font-size:11px;opacity:.75}
-
-/* PROMO BANNER */
-.promo{background:linear-gradient(135deg,#003d82,#0057B8);color:#fff;margin:32px 20px;max-width:1060px;margin-left:auto;margin-right:auto;border-radius:18px;padding:36px 40px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:28px;position:relative;overflow:hidden}
-.promo::after{content:'';position:absolute;right:-40px;bottom:-60px;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,.07)}
-.promo img{height:110px;object-fit:contain;position:relative;z-index:2;border-radius:10px}
-.pb{background:var(--orange);color:#fff;font-size:11px;font-weight:800;padding:5px 13px;border-radius:20px;display:inline-block;margin-bottom:12px;text-transform:uppercase}
-.promo h2{font-size:24px;font-weight:800;margin-bottom:8px}
-.promo p{font-size:14px;opacity:.85;margin-bottom:20px}
-
-/* SECTION */
-.sec{padding:56px 20px;max-width:1100px;margin:0 auto}
-.slbl2{font-size:11px;font-weight:700;color:var(--sky);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
-.stitle{font-size:28px;font-weight:800;margin-bottom:32px;line-height:1.2}
-
-/* SERVICES GRID */
-.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.sc{background:var(--wh);border:1.5px solid var(--bo);border-radius:var(--r);padding:24px 18px;text-align:center;transition:all .25s;cursor:pointer;text-decoration:none;color:var(--tx);display:block}
-.sc:hover{border-color:var(--blue);box-shadow:var(--sh);transform:translateY(-3px)}
-.sc-img{width:100%;height:70px;object-fit:contain;margin-bottom:10px}
-.sc-ico{width:52px;height:52px;border-radius:14px;background:var(--bl);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:24px;display:none}
-.sc h3{font-size:14px;font-weight:700;margin-bottom:6px}
-.sc p{font-size:12px;color:var(--mu)}
-
-/* TARIFFS */
-.tsec{background:linear-gradient(135deg,#f0f7ff,#e8f0fb);padding:56px 20px}
-.tin{max-width:1100px;margin:0 auto}
-.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:32px}
-.tc{background:var(--wh);border:1.5px solid var(--bo);border-radius:16px;padding:28px 24px;transition:all .25s;position:relative;overflow:hidden}
-.tc.pop{border-color:var(--blue);box-shadow:0 8px 32px rgba(0,87,184,.15)}
-.popb{position:absolute;top:0;right:0;background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:6px 14px;border-radius:0 16px 0 12px}
-.tn{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
-.tp{font-size:36px;font-weight:800;color:var(--blue);margin-bottom:4px}
-.tp span{font-size:16px;font-weight:500;color:var(--mu)}
-.ts2{font-size:26px;font-weight:800;margin:14px 0 6px}
-.tsl{font-size:12px;color:var(--mu);margin-bottom:18px}
-.tf{list-style:none;margin-bottom:24px}
-.tf li{display:flex;align-items:center;gap:7px;font-size:13px;padding:6px 0;border-bottom:1px solid var(--bo)}
-.tf li:last-child{border-bottom:none}
-.ck{color:#22c55e;font-weight:700;font-size:15px}
-.btt{width:100%;padding:12px;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;border:none;transition:all .2s}
-.btp{background:var(--blue);color:#fff}
-.btp:hover{background:var(--bd)}
-.bto{background:transparent;border:1.5px solid var(--bo);color:var(--tx)}
-.bto:hover{border-color:var(--blue);color:var(--blue)}
-
-/* TARIFF TABLE */
-.ttable{width:100%;border-collapse:collapse;margin-top:20px;font-size:13px}
-.ttable th{background:var(--blue);color:#fff;padding:10px 14px;text-align:left;font-weight:600}
-.ttable td{padding:10px 14px;border-bottom:1px solid var(--bo)}
-.ttable tr:hover td{background:#f0f7ff}
-.ttable tr:last-child td{border-bottom:none}
-.spd{font-weight:800;color:var(--blue);font-size:15px}
-.price-tag{font-weight:800;color:var(--tx)}
-
-/* NEWS */
-.ng{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.nc{background:var(--wh);border:1.5px solid var(--bo);border-radius:var(--r);overflow:hidden;transition:all .25s;cursor:pointer}
-.nc:hover{box-shadow:var(--sh);transform:translateY(-2px)}
-.nc-img{height:140px;background:linear-gradient(135deg,var(--bl),var(--blue));display:flex;align-items:center;justify-content:center;font-size:38px;overflow:hidden}
-.nc-img img{width:100%;height:100%;object-fit:cover}
-.nc-body{padding:18px}
-.ndate{font-size:11px;color:var(--mu);margin-bottom:6px}
-.nc h3{font-size:14px;font-weight:700;margin-bottom:6px;line-height:1.4}
-.nc p{font-size:12px;color:var(--mu)}
-
-/* CONTACTS */
-.csec{background:var(--tx);color:#fff;padding:56px 20px}
-.cin{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px}
-.cbrand p{font-size:13px;opacity:.6;margin-bottom:18px}
-.soc{display:flex;gap:8px}
-.sb{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;transition:all .2s}
-.sb:hover{background:var(--blue)}
-.cc h4{font-size:12px;font-weight:700;margin-bottom:14px;opacity:.45;letter-spacing:1px;text-transform:uppercase}
-.cc a,.cc p{display:block;color:rgba(255,255,255,.72);text-decoration:none;font-size:13px;margin-bottom:8px;transition:color .2s}
-.cc a:hover{color:#fff}
-.manas-highlight{background:rgba(247,148,29,.15);border:1px solid rgba(247,148,29,.35);border-radius:10px;padding:12px 14px;margin-bottom:14px}
-.manas-highlight .city{font-size:14px;font-weight:800;color:var(--orange);margin-bottom:4px}
-.manas-highlight a{color:rgba(255,255,255,.9)!important;font-weight:600;font-size:14px!important;margin-bottom:4px!important}
-.fbar{border-top:1px solid rgba(255,255,255,.1);margin-top:40px;padding-top:20px;display:flex;justify-content:space-between;align-items:center;opacity:.45;font-size:12px;max-width:1100px;margin-left:auto;margin-right:auto}
-
-/* BALANCE */
-.bwid{background:var(--wh);border:1.5px solid var(--bo);border-radius:14px;padding:24px;margin-bottom:20px}
-.bwid h3{font-size:15px;font-weight:700;margin-bottom:12px}
-.ig{display:flex;gap:10px}
-.ig input{flex:1;padding:10px 14px;border:1.5px solid var(--bo);border-radius:8px;font-family:inherit;font-size:14px;outline:none;transition:border-color .2s}
-.ig input:focus{border-color:var(--blue)}
-.ig button{background:var(--blue);color:#fff;border:none;padding:10px 18px;border-radius:8px;font-weight:700;cursor:pointer;font-family:inherit}
-
-/* EQUIP */
-.eg{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.ec{background:var(--wh);border:1.5px solid var(--bo);border-radius:var(--r);padding:24px;transition:all .25s}
-.ec:hover{box-shadow:var(--sh);transform:translateY(-2px)}
-.ec h3{font-size:14px;font-weight:700;margin-bottom:8px}
-.ec p{font-size:12px;color:var(--mu);margin-bottom:14px}
-.price-pill{background:var(--bl);color:var(--blue);font-size:13px;font-weight:800;padding:5px 14px;border-radius:20px;display:inline-block}
-
-/* ACCIA PAGE */
-.accia-card{background:var(--wh);border:1.5px solid var(--bo);border-radius:16px;padding:32px;margin-bottom:24px}
-.accia-card h2{font-size:20px;font-weight:800;color:var(--blue);margin-bottom:12px}
-.accia-list{list-style:none;margin:14px 0}
-.accia-list li{display:flex;align-items:flex-start;gap:8px;padding:8px 0;border-bottom:1px solid var(--bo);font-size:14px}
-.accia-list li:last-child{border-bottom:none}
-.step{width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-
-/* MANAS SPECIAL */
-.manas-banner{background:linear-gradient(135deg,#F7941D,#e67e00);color:#fff;border-radius:16px;padding:28px 32px;margin-bottom:32px;position:relative;overflow:hidden}
-.manas-banner::after{content:'🏔';position:absolute;right:20px;bottom:-10px;font-size:80px;opacity:.2}
-.manas-banner h2{font-size:22px;font-weight:800;margin-bottom:8px}
-.manas-banner p{font-size:14px;opacity:.9;margin-bottom:16px}
-.manas-banner .phone-big{font-size:22px;font-weight:800;background:rgba(255,255,255,.2);display:inline-block;padding:8px 20px;border-radius:10px}
-
-/* HAMBURGER */
-.burger{display:none;flex-direction:column;justify-content:center;align-items:center;width:40px;height:40px;border:none;background:none;cursor:pointer;gap:5px;padding:4px;border-radius:8px;transition:background .2s}
-.burger:hover{background:var(--bl)}
-.burger span{display:block;width:22px;height:2px;background:var(--tx);border-radius:2px;transition:all .3s}
-.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.burger.open span:nth-child(2){opacity:0}
-.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-
-/* MOBILE NAV OVERLAY */
-.mob-nav{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;backdrop-filter:blur(2px)}
-.mob-nav.open{display:block}
-.mob-menu{position:fixed;top:0;right:0;width:280px;height:100%;background:#fff;z-index:160;padding:20px 0;box-shadow:-4px 0 24px rgba(0,0,0,.15);overflow-y:auto;transform:translateX(100%);transition:transform .3s ease}
-.mob-menu.open{transform:translateX(0)}
-.mob-menu-head{padding:12px 20px 20px;border-bottom:1px solid var(--bo);display:flex;align-items:center;justify-content:space-between}
-.mob-close{border:none;background:none;font-size:22px;cursor:pointer;color:var(--mu);line-height:1}
-.mob-menu nav{display:flex;flex-direction:column;gap:2px;padding:12px 12px}
-.mob-menu nav button{text-align:left;padding:12px 14px;font-size:15px;border-radius:10px;width:100%}
-.mob-menu .ha{flex-direction:column;align-items:stretch;padding:12px 12px;gap:8px;border-top:1px solid var(--bo);margin-top:4px}
-.mob-menu .ph{text-align:center}
-.mob-menu .bo-btn{text-align:center}
-
-/* ===== TABLET: 769px – 1024px ===== */
-@media(min-width:769px) and (max-width:1024px){
-  .hi{padding:0 16px}
-  nav button{font-size:12px;padding:6px 8px}
-  .ph{font-size:12px;padding:6px 10px}
-  .bo-btn{font-size:12px;padding:6px 12px}
-  .hero-in{gap:24px}
-  .hero h1{font-size:30px}
-  .sg{grid-template-columns:repeat(2,1fr)}
-  .ng{grid-template-columns:repeat(2,1fr)}
-  .eg{grid-template-columns:repeat(2,1fr)}
-  .tg{grid-template-columns:repeat(2,1fr)}
-  .cin{grid-template-columns:1fr 1fr;gap:24px}
-  .promo{padding:28px 28px}
-  .promo img{height:80px}
-  .promo h2{font-size:20px}
-  /* contacts */
-  [style*="grid-template-columns:repeat(3,1fr)"]{grid-template-columns:1fr 1fr!important}
-  [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
-  /* business cloud */
-  [style*="grid-template-columns:repeat(4,1fr)"]{grid-template-columns:repeat(2,1fr)!important}
-}
-
-/* ===== MOBILE: ≤768px ===== */
-@media(max-width:768px){
-  /* Header */
-  nav{display:none}
-  .ha{display:none}
-  .burger{display:flex}
-  .hi{height:56px;padding:0 14px}
-  .logo img{height:28px}
-
-  /* Hero */
-  .hero{padding:40px 16px 48px}
-  .hero-in{grid-template-columns:1fr;gap:28px}
-  .hero h1{font-size:26px}
-  .hero p{font-size:14px;max-width:100%}
-  .hbtns{flex-direction:column;gap:10px}
-  .hbtns .btn-p,.hbtns .btn-w{width:100%;text-align:center}
-  .hcard{padding:18px}
-  .sval{font-size:17px}
-
-  /* Ticker */
-  .ti{font-size:12px}
-
-  /* Sections */
-  .sec{padding:36px 16px}
-  .stitle{font-size:22px;margin-bottom:20px}
-
-  /* Grids */
-  .sg{grid-template-columns:repeat(2,1fr);gap:10px}
-  .ng{grid-template-columns:1fr;gap:14px}
-  .eg{grid-template-columns:1fr;gap:14px}
-  .tg{grid-template-columns:1fr;gap:16px}
-  .cin{grid-template-columns:1fr;gap:24px}
-
-  /* Promo */
-  .promo{grid-template-columns:1fr;padding:22px 18px;margin:20px 16px;border-radius:14px}
-  .promo img{display:none}
-  .promo h2{font-size:18px}
-
-  /* Manas banner */
-  .manas-banner{padding:20px 18px;border-radius:12px}
-  .manas-banner h2{font-size:18px}
-  .manas-banner .phone-big{font-size:18px}
-
-  /* Tariff table */
-  .ttable{font-size:12px;display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
-  .ttable thead,.ttable tbody,.ttable th,.ttable td,.ttable tr{display:revert}
-  .ttable th,.ttable td{padding:8px 10px;white-space:nowrap}
-
-  /* Tariff cards */
-  .tc{padding:22px 18px}
-  .tp{font-size:28px}
-
-  /* Footer */
-  .csec{padding:36px 16px}
-  .fbar{flex-direction:column;gap:10px;text-align:center}
-
-  /* Balance widget */
-  .ig{flex-direction:column;gap:8px}
-  .ig button{width:100%;padding:12px}
-
-  /* Contacts grids */
-  [style*="grid-template-columns:repeat(3,1fr)"]{grid-template-columns:1fr!important}
-  [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
-  [style*="grid-template-columns:repeat(4,1fr)"]{grid-template-columns:repeat(2,1fr)!important}
-  [style*="grid-template-columns:2fr 1fr 1fr 1fr"]{grid-template-columns:1fr!important}
-
-  /* Business / TV 2-col grids */
-  .accia-card{padding:20px 16px}
-  .sc{padding:16px 10px}
-  .sc-img{height:50px}
-  .sc h3{font-size:13px}
-  .sc p{font-size:11px}
-
-  /* Equipment cards */
-  .ec{padding:18px 14px}
-
-  /* Service cards */
-  .nc-img{height:110px}
-}
-
-/* ===== SMALL MOBILE: ≤400px ===== */
-@media(max-width:400px){
-  .sg{grid-template-columns:1fr}
-  .hero h1{font-size:22px}
-  [style*="grid-template-columns:repeat(4,1fr)"]{grid-template-columns:1fr!important}
-}
-</style>
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
 
+<!-- ═══ ШАПКА ═══ -->
 <header>
   <div class="hi">
-    <a class="logo" href="#">
-      <img src="https://aknet.kg/ima/header/logo.png?v=64693cce" alt="Акнет" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <a class="logo" href="#" onclick="show('home')">
+      <img src="https://aknet.kg/ima/header/logo.png?v=64693cce" alt="АКНЕТ"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
       <span class="logo-fb">АКНЕТ</span>
     </a>
     <nav>
-      <button class="active" onclick="show('home')">Главная</button>
-      <button onclick="show('tariffs')">Тарифы</button>
-      <button onclick="show('tv')">Цифровое ТВ</button>
-      <button onclick="show('business')">Бизнес</button>
-      <button onclick="show('equip')">Оборудование</button>
-      <button onclick="show('akcia')">🌸 Акция</button>
-      <button onclick="show('contacts')">Контакты</button>
+      <button data-page="home"     data-i18n="nav_home"     onclick="show('home')"     class="active">Главная</button>
+      <button data-page="tariffs"  data-i18n="nav_tariffs"  onclick="show('tariffs')">Тарифы</button>
+      <button data-page="tv"       data-i18n="nav_tv"       onclick="show('tv')">Цифровое ТВ</button>
+      <button data-page="business" data-i18n="nav_business" onclick="show('business')">Бизнес</button>
+      <button data-page="equip"    data-i18n="nav_equip"    onclick="show('equip')">Оборудование</button>
+      <button data-page="akcia"    data-i18n="nav_akcia"    onclick="show('akcia')">🌸 Акция</button>
+      <button data-page="contacts" data-i18n="nav_contacts" onclick="show('contacts')">Контакты</button>
     </nav>
     <div class="ha">
-      <span class="ph">📞 0555 611 004</span>
-      <button class="bo-btn">Личный кабинет</button>
+      <div class="lang-sw">
+        <button data-lang="ru" class="active" onclick="setLang('ru')">RU</button>
+        <button data-lang="kg"                onclick="setLang('kg')">KG</button>
+      </div>
+      <a href="tel:+996555611004" class="ph">📞 0555 611 004</a>
+      <a href="https://billing.aknet.kg/" target="_blank" rel="noopener" class="bo-btn" data-i18n="cabinet">👤 Личный кабинет</a>
     </div>
     <button class="burger" id="burger" aria-label="Меню" onclick="toggleMenu()">
       <span></span><span></span><span></span>
@@ -327,277 +46,244 @@ nav button:hover,nav button.active{background:var(--bl);color:var(--blue)}
   </div>
 </header>
 
-<!-- MOBILE MENU -->
+<!-- ═══ МОБИЛЬНОЕ МЕНЮ ═══ -->
 <div class="mob-nav" id="mobNav" onclick="closeMenu()"></div>
 <div class="mob-menu" id="mobMenu">
   <div class="mob-menu-head">
-    <a class="logo" href="#">
-      <img src="https://aknet.kg/ima/header/logo.png?v=64693cce" alt="Акнет" style="height:28px" onerror="this.style.display='none'">
+    <a class="logo" href="#" onclick="show('home');closeMenu()">
+      <img src="https://aknet.kg/ima/header/logo.png?v=64693cce" alt="АКНЕТ" style="height:28px" onerror="this.style.display='none'">
       <span style="font-size:20px;font-weight:800;color:var(--blue);letter-spacing:-1px">АКНЕТ</span>
     </a>
     <button class="mob-close" onclick="closeMenu()">&#x2715;</button>
   </div>
+  <div class="mob-lang">
+    <div class="lang-sw">
+      <button data-lang="ru" class="active" onclick="setLang('ru')">RU</button>
+      <button data-lang="kg"                onclick="setLang('kg')">KG</button>
+    </div>
+  </div>
   <nav>
-    <button onclick="show('home');closeMenu()">Главная</button>
-    <button onclick="show('tariffs');closeMenu()">Тарифы</button>
-    <button onclick="show('tv');closeMenu()">Цифровое ТВ</button>
-    <button onclick="show('business');closeMenu()">Бизнес</button>
-    <button onclick="show('equip');closeMenu()">Оборудование</button>
-    <button onclick="show('akcia');closeMenu()">🌸 Акция</button>
-    <button onclick="show('contacts');closeMenu()">Контакты</button>
+    <button data-page="home"     data-i18n="nav_home"     onclick="show('home');closeMenu()">Главная</button>
+    <button data-page="tariffs"  data-i18n="nav_tariffs"  onclick="show('tariffs');closeMenu()">Тарифы</button>
+    <button data-page="tv"       data-i18n="nav_tv"       onclick="show('tv');closeMenu()">Цифровое ТВ</button>
+    <button data-page="business" data-i18n="nav_business" onclick="show('business');closeMenu()">Бизнес</button>
+    <button data-page="equip"    data-i18n="nav_equip"    onclick="show('equip');closeMenu()">Оборудование</button>
+    <button data-page="akcia"    data-i18n="nav_akcia"    onclick="show('akcia');closeMenu()">🌸 Акция</button>
+    <button data-page="contacts" data-i18n="nav_contacts" onclick="show('contacts');closeMenu()">Контакты</button>
   </nav>
-  <div class="ha" style="flex-direction:column;align-items:stretch;padding:12px;gap:8px;border-top:1px solid var(--bo);margin-top:4px">
-    <span class="ph" style="display:block;text-align:center">📞 0555 611 004</span>
-    <button class="bo-btn" style="width:100%;font-family:inherit">Личный кабинет</button>
+  <div class="mob-menu-bottom">
+    <a href="tel:+996555611004" class="ph">📞 0555 611 004</a>
+    <a href="https://billing.aknet.kg/" target="_blank" rel="noopener" class="bo-btn" data-i18n="cabinet" onclick="closeMenu()">👤 Личный кабинет</a>
   </div>
 </div>
 
-<!-- HOME -->
+<!-- ═══ ГЛАВНАЯ ═══ -->
 <div id="home" class="page active">
   <div class="ticker">
     <div class="ticker-track">
-      <div class="ti"><span class="td"></span>🌸 АКЦИЯ: Весна с АКНЕТ — первый месяц БЕСПЛАТНО! 16 марта — 31 мая 2026</div>
-      <div class="ti"><span class="td"></span>📡 Начинаем строительство сети в Иссык-Кульской области</div>
-      <div class="ti"><span class="td"></span>🏙️ Теперь мы работаем в г. Манас! Менеджер: 0555 611 004</div>
-      <div class="ti"><span class="td"></span>📺 ТВ «Семейный Плюс» — 200+ каналов всего за 465 сом/мес</div>
-      <div class="ti"><span class="td"></span>🌸 АКЦИЯ: Весна с АКНЕТ — первый месяц БЕСПЛАТНО! 16 марта — 31 мая 2026</div>
-      <div class="ti"><span class="td"></span>📡 Начинаем строительство сети в Иссык-Кульской области</div>
-      <div class="ti"><span class="td"></span>🏙️ Теперь мы работаем в г. Манас! Менеджер: 0555 611 004</div>
-      <div class="ti"><span class="td"></span>📺 ТВ «Семейный Плюс» — 200+ каналов всего за 465 сом/мес</div>
+      <div class="ti"><span class="td"></span><span data-i18n="ticker1">🌸 АКЦИЯ: Весна с АКНЕТ — первый месяц БЕСПЛАТНО! 16 марта — 31 мая 2026</span></div>
+      <div class="ti"><span class="td"></span><span data-i18n="ticker2">📡 Начинаем строительство сети в Иссык-Кульской области</span></div>
+      <div class="ti"><span class="td"></span><span data-i18n="ticker3">🏙️ Теперь мы работаем в г. Манас! Менеджер: 0555 611 004</span></div>
+      <div class="ti"><span class="td"></span><span data-i18n="ticker4">📺 ТВ «Семейный Плюс» — 200+ каналов всего за 465 сом/мес</span></div>
+      <div class="ti"><span class="td"></span><span data-i18n="ticker1">🌸 АКЦИЯ: Весна с АКНЕТ — первый месяц БЕСПЛАТНО! 16 марта — 31 мая 2026</span></div>
+      <div class="ti"><span class="td"></span><span data-i18n="ticker2">📡 Начинаем строительство сети в Иссык-Кульской области</span></div>
+      <div class="ti"><span class="td"></span><span data-i18n="ticker3">🏙️ Теперь мы работаем в г. Манас! Менеджер: 0555 611 004</span></div>
+      <div class="ti"><span class="td"></span><span data-i18n="ticker4">📺 ТВ «Семейный Плюс» — 200+ каналов всего за 465 сом/мес</span></div>
     </div>
   </div>
-
   <section class="hero">
     <div class="hero-in">
       <div>
-        <div class="hbadge">🚀 Тарифы 2026</div>
-        <h1>Быстрый интернет<br>и <span>Цифровое ТВ</span><br>в Кыргызстане</h1>
-        <p>Более 20 лет надёжной связи. Интернет до 600 Мбит/с, 200+ каналов iTV. Теперь и в г. Манас!</p>
+        <div class="hbadge" data-i18n="hero_badge">🚀 Тарифы 2026</div>
+        <h1 data-i18n="hero_h1">Быстрый интернет<br>и <span style="color:#F7941D">Цифровое ТВ</span><br>в Кыргызстане</h1>
+        <p data-i18n="hero_p">Более 20 лет надёжной связи. Интернет до 600 Мбит/с, 200+ каналов iTV. Теперь и в г. Манас!</p>
         <div class="hbtns">
-          <button class="btn-p" onclick="show('akcia')">🌸 Акция — 1 месяц бесплатно</button>
-          <button class="btn-w" onclick="show('tariffs')">Смотреть тарифы</button>
+          <button class="btn-p" onclick="show('akcia')" data-i18n="hero_btn1">🌸 Акция — 1 месяц бесплатно</button>
+          <button class="btn-w" onclick="show('tariffs')" data-i18n="hero_btn2">Смотреть тарифы</button>
         </div>
       </div>
       <div>
         <div class="hcard">
-          <div class="hstat"><div class="sico">⚡</div><div><div class="sval">600 Мбит/с</div><div class="slbl">Максимальная скорость</div></div></div>
-          <div class="hstat"><div class="sico">📺</div><div><div class="sval">200+ каналов</div><div class="slbl">Цифровое ТВ iTV АКНЕТ</div></div></div>
-          <div class="hstat"><div class="sico">🏙️</div><div><div class="sval">Бишкек, Ош, Манас</div><div class="slbl">и Иссык-Кульская область</div></div></div>
-          <div class="hstat"><div class="sico">🎁</div><div><div class="sval">1 месяц бесплатно</div><div class="slbl">Акция для новых абонентов</div></div></div>
+          <div class="hstat"><div class="sico">⚡</div><div><div class="sval">600 Мбит/с</div><div class="slbl" data-i18n="stat1">Максимальная скорость</div></div></div>
+          <div class="hstat"><div class="sico">📺</div><div><div class="sval">200+ каналов</div><div class="slbl" data-i18n="stat2">Цифровое ТВ iTV АКНЕТ</div></div></div>
+          <div class="hstat"><div class="sico">🏙️</div><div><div class="sval" data-i18n="stat3v">Бишкек, Ош, Манас</div><div class="slbl" data-i18n="stat3">и Иссык-Кульская область</div></div></div>
+          <div class="hstat"><div class="sico">🎁</div><div><div class="sval" data-i18n="stat4v">1 месяц бесплатно</div><div class="slbl" data-i18n="stat4">Акция для новых абонентов</div></div></div>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- MANAS SPECIAL -->
-  <div style="max-width:1100px;margin:32px auto;padding:0 20px">
+  <div class="container" style="margin-top:32px">
     <div class="manas-banner">
-      <h2>🏔 АКНЕТ пришёл в г. Манас!</h2>
-      <p>Теперь жители Манаса могут подключить быстрый интернет и цифровое ТВ от АКНЕТ.<br>Свяжитесь с нашим менеджером по городу Манас напрямую:</p>
+      <h2 data-i18n="manas_h">🏔 АКНЕТ пришёл в г. Манас!</h2>
+      <p data-i18n="manas_p">Теперь жители Манаса могут подключить быстрый интернет и цифровое ТВ от АКНЕТ.<br>Свяжитесь с нашим менеджером напрямую:</p>
       <div class="phone-big">📞 0555 611 004</div>
     </div>
   </div>
-
-  <!-- PROMO -->
-  <div style="max-width:1100px;margin:0 auto;padding:0 20px">
+  <div class="container">
     <div class="promo">
       <div>
-        <div class="pb">🌸 Акция — Весна 2026</div>
-        <h2>Первый месяц — БЕСПЛАТНО!</h2>
-        <p>С 16 марта по 31 мая 2026 года для новых абонентов. Доступно на тарифы Интернет и Интернет + ТВ. Для жителей квартир и частного сектора по всей сети АКНЕТ.</p>
-        <button class="btn-p" onclick="show('akcia')">Подробнее об акции</button>
+        <div class="pb" data-i18n="promo_badge">🌸 Акция — Весна 2026</div>
+        <h2 data-i18n="promo_h">Первый месяц — БЕСПЛАТНО!</h2>
+        <p data-i18n="promo_p">С 16 марта по 31 мая 2026 года для новых абонентов. Доступно на тарифы Интернет и Интернет + ТВ.</p>
+        <button class="btn-p" onclick="show('akcia')" data-i18n="promo_btn">Подробнее об акции</button>
       </div>
       <img src="files/vesna.png" alt="Весна с АКНЕТ" onerror="this.style.display='none'">
     </div>
   </div>
-
-  <!-- SERVICES -->
   <div class="sec">
-    <div class="slbl2">Наши услуги</div>
-    <div class="stitle">Всё для вашего дома и бизнеса</div>
+    <div class="slbl2" data-i18n="serv_lbl">Наши услуги</div>
+    <div class="stitle" data-i18n="serv_title">Всё для вашего дома и бизнеса</div>
     <div class="sg">
-      <a class="sc" onclick="show('business')">
-        <img class="sc-img" src="https://aknet.kg/files/media/0/84.png" alt="Бизнес" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="sc-ico">💼</div>
-        <h3>Для бизнеса</h3>
-        <p>VPN, облачные сервисы, IP-телефония</p>
-      </a>
-      <a class="sc" onclick="show('tv')">
-        <img class="sc-img" src="https://aknet.kg/files/media/0/77.png" alt="ТВ" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="sc-ico">📺</div>
-        <h3>Цифровое ТВ</h3>
-        <p>200+ каналов HD — iTV АКНЕТ</p>
-      </a>
-      <a class="sc" onclick="show('tariffs')">
-        <img class="sc-img" src="https://aknet.kg/files/media/0/83.png" alt="ТВ+Инет" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="sc-ico">🌐</div>
-        <h3>ТВ + Интернет</h3>
-        <p>Комбо-пакет от 750 сом/мес</p>
-      </a>
-      <a class="sc" onclick="show('equip')">
-        <img class="sc-img" src="https://aknet.kg/files/media/0/76.png" alt="Оборуд." onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="sc-ico">📦</div>
-        <h3>Оборудование</h3>
-        <p>Роутеры, Mesh Wi-Fi, приставки</p>
-      </a>
+      <a class="sc" onclick="show('business')"><img class="sc-img" src="https://aknet.kg/files/media/0/84.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="sc-ico">💼</div><h3 data-i18n="svc1_h">Для бизнеса</h3><p data-i18n="svc1_p">VPN, облачные сервисы, IP-телефония</p></a>
+      <a class="sc" onclick="show('tv')"><img class="sc-img" src="https://aknet.kg/files/media/0/77.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="sc-ico">📺</div><h3 data-i18n="svc2_h">Цифровое ТВ</h3><p data-i18n="svc2_p">200+ каналов HD — iTV АКНЕТ</p></a>
+      <a class="sc" onclick="show('tariffs')"><img class="sc-img" src="https://aknet.kg/files/media/0/83.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="sc-ico">🌐</div><h3 data-i18n="svc3_h">ТВ + Интернет</h3><p data-i18n="svc3_p">Комбо-пакет от 750 сом/мес</p></a>
+      <a class="sc" onclick="show('equip')"><img class="sc-img" src="https://aknet.kg/files/media/0/76.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="sc-ico">📦</div><h3 data-i18n="svc4_h">Оборудование</h3><p data-i18n="svc4_p">Роутеры, Mesh Wi-Fi, приставки</p></a>
     </div>
   </div>
-
-  <!-- BALANCE -->
-  <div style="max-width:1100px;margin:0 auto;padding:0 20px 40px">
+  <div class="container" style="padding-bottom:40px">
     <div class="bwid">
-      <h3>💳 Узнать баланс лицевого счёта</h3>
+      <h3 data-i18n="bal_h">💳 Узнать баланс лицевого счёта</h3>
       <div class="ig">
-        <input type="text" placeholder="Введите номер лицевого счёта...">
-        <button>Проверить</button>
+        <input type="text" data-i18n-ph="bal_ph" placeholder="Введите номер лицевого счёта..." onkeydown="if(event.key==='Enter')checkBalance(this)">
+        <button onclick="checkBalance(this)" data-i18n="bal_btn">Проверить</button>
       </div>
-      <p style="font-size:12px;color:var(--mu);margin-top:8px">Номер счёта указан в договоре или в портале iPTV приставки</p>
+      <p style="font-size:12px;color:var(--mu);margin-top:8px" data-i18n="bal_hint">Номер счёта указан в договоре или в портале iPTV приставки</p>
     </div>
   </div>
-
-  <!-- NEWS -->
   <div class="sec" style="padding-top:0">
-    <div class="slbl2">Новости</div>
-    <div class="stitle">Последние события</div>
+    <div class="slbl2" data-i18n="news_lbl">Новости</div>
+    <div class="stitle" data-i18n="news_title">Последние события</div>
     <div class="ng">
-      <div class="nc" onclick="show('akcia')">
-        <div class="nc-img"><img src="https://aknet.kg/files/banners/newsvesnaru.png" alt="" onerror="this.parentElement.innerHTML='🌸'"></div>
-        <div class="nc-body"><div class="ndate">16 марта 2026</div><h3>ВЕСНА с АКНЕТ!</h3><p>Первый месяц — бесплатно для новых абонентов с 16 марта по 31 мая 2026.</p></div>
-      </div>
-      <div class="nc">
-        <div class="nc-img">📡</div>
-        <div class="nc-body"><div class="ndate">5 марта 2026</div><h3>Строительство сети в Иссык-Кульской области</h3><p>АКНЕТ расширяет покрытие — подключение в новых районах.</p></div>
-      </div>
-      <div class="nc">
-        <div class="nc-img">🏙️</div>
-        <div class="nc-body"><div class="ndate">Март 2026</div><h3>АКНЕТ в г. Манас!</h3><p>Открываем новое направление. Менеджер по Манасу: 0555 611 004.</p></div>
-      </div>
+      <div class="nc" onclick="show('akcia')"><div class="nc-img"><img src="https://aknet.kg/files/banners/newsvesnaru.png" alt="" onerror="this.parentElement.innerHTML='🌸'"></div><div class="nc-body"><div class="ndate" data-i18n="news1_date">16 марта 2026</div><h3 data-i18n="news1_h">ВЕСНА с АКНЕТ!</h3><p data-i18n="news1_p">Первый месяц — бесплатно для новых абонентов с 16 марта по 31 мая 2026.</p></div></div>
+      <div class="nc"><div class="nc-img">📡</div><div class="nc-body"><div class="ndate" data-i18n="news2_date">5 марта 2026</div><h3 data-i18n="news2_h">Строительство сети в Иссык-Кульской области</h3><p data-i18n="news2_p">АКНЕТ расширяет покрытие — подключение в новых районах.</p></div></div>
+      <div class="nc"><div class="nc-img">🏙️</div><div class="nc-body"><div class="ndate" data-i18n="news3_date">Март 2026</div><h3 data-i18n="news3_h">АКНЕТ в г. Манас!</h3><p data-i18n="news3_p">Открываем новое направление. Менеджер по Манасу: 0555 611 004.</p></div></div>
     </div>
   </div>
 </div>
 
-<!-- TARIFFS PAGE -->
+<!-- ═══ ТАРИФЫ ═══ -->
 <div id="tariffs" class="page">
   <div class="tsec" style="padding-top:40px">
     <div class="tin">
-      <div class="slbl2">Тарифные планы</div>
-      <div class="stitle">iTV Unlim Family — Интернет + ТВ</div>
-      <table class="ttable">
-        <thead><tr><th>Тариф</th><th>Скорость</th><th>ТВ-каналы</th><th>Стоимость/мес</th><th></th></tr></thead>
-        <tbody>
-          <tr><td><strong>iTV Unlim Family Start</strong></td><td class="spd">40 Мбит/с</td><td>100+ каналов</td><td class="price-tag">750 сом</td><td><button class="btt bto" style="width:auto;padding:6px 16px" onclick="show('contacts')">Подключить</button></td></tr>
-          <tr><td><strong>iTV Unlim Family 1</strong></td><td class="spd">60 Мбит/с</td><td>150+ каналов</td><td class="price-tag">990 сом</td><td><button class="btt bto" style="width:auto;padding:6px 16px" onclick="show('contacts')">Подключить</button></td></tr>
-          <tr><td><strong>iTV Unlim Family 2</strong></td><td class="spd">80 Мбит/с</td><td>200+ каналов</td><td class="price-tag">1 200 сом</td><td><button class="btt btp" style="width:auto;padding:6px 16px" onclick="show('contacts')">Подключить</button></td></tr>
-          <tr><td><strong>iTV Unlim Family 3</strong></td><td class="spd">100 Мбит/с</td><td>200+ каналов</td><td class="price-tag">1 650 сом</td><td><button class="btt bto" style="width:auto;padding:6px 16px" onclick="show('contacts')">Подключить</button></td></tr>
-          <tr><td><strong>iTV Unlim Family 4</strong></td><td class="spd">350 Мбит/с</td><td>200+ каналов</td><td class="price-tag">2 200 сом</td><td><button class="btt bto" style="width:auto;padding:6px 16px" onclick="show('contacts')">Подключить</button></td></tr>
-          <tr><td><strong>iTV Unlim Family 5</strong></td><td class="spd">600 Мбит/с</td><td>200+ каналов</td><td class="price-tag">2 500 сом</td><td><button class="btt bto" style="width:auto;padding:6px 16px" onclick="show('contacts')">Подключить</button></td></tr>
-        </tbody>
-      </table>
-      <p style="font-size:12px;color:var(--mu);margin-top:12px">* Цены указаны в сомах с учётом всех налогов. Start недоступен в г. Бишкек и в частном секторе. Для тарифов 4 и 5 требуется оборудование >100 Мбит/с.</p>
-
-      <div class="stitle" style="margin-top:48px">Только Цифровое ТВ</div>
+      <div class="slbl2" data-i18n="tar_lbl">Тарифные планы</div>
+      <div class="stitle" data-i18n="tar_title">iTV Unlim Family — Интернет + ТВ</div>
+      <div style="overflow-x:auto">
+        <table class="ttable">
+          <thead><tr><th data-i18n="th_tariff">Тариф</th><th data-i18n="th_speed">Скорость</th><th data-i18n="th_ch">ТВ-каналы</th><th data-i18n="th_price">Стоимость/мес</th><th></th></tr></thead>
+          <tbody>
+            <tr><td><strong>iTV Unlim Family Start</strong></td><td class="spd">40 Мбит/с</td><td data-i18n="ch100">100+ каналов</td><td class="price-tag">750 сом</td><td><button class="btt bto" style="width:auto;padding:6px 16px" onclick="show('contacts')" data-i18n="connect">Подключить</button></td></tr>
+            <tr><td><strong>iTV Unlim Family 1</strong></td><td class="spd">60 Мбит/с</td><td data-i18n="ch150">150+ каналов</td><td class="price-tag">990 сом</td><td><button class="btt bto" style="width:auto;padding:6px 16px" onclick="show('contacts')" data-i18n="connect">Подключить</button></td></tr>
+            <tr><td><strong>iTV Unlim Family 2</strong></td><td class="spd">80 Мбит/с</td><td data-i18n="ch200">200+ каналов</td><td class="price-tag">1 200 сом</td><td><button class="btt btp" style="width:auto;padding:6px 16px" onclick="show('contacts')" data-i18n="connect">Подключить</button></td></tr>
+            <tr><td><strong>iTV Unlim Family 3</strong></td><td class="spd">100 Мбит/с</td><td data-i18n="ch200">200+ каналов</td><td class="price-tag">1 650 сом</td><td><button class="btt bto" style="width:auto;padding:6px 16px" onclick="show('contacts')" data-i18n="connect">Подключить</button></td></tr>
+            <tr><td><strong>iTV Unlim Family 4</strong></td><td class="spd">350 Мбит/с</td><td data-i18n="ch200">200+ каналов</td><td class="price-tag">2 200 сом</td><td><button class="btt bto" style="width:auto;padding:6px 16px" onclick="show('contacts')" data-i18n="connect">Подключить</button></td></tr>
+            <tr><td><strong>iTV Unlim Family 5</strong></td><td class="spd">600 Мбит/с</td><td data-i18n="ch200">200+ каналов</td><td class="price-tag">2 500 сом</td><td><button class="btt bto" style="width:auto;padding:6px 16px" onclick="show('contacts')" data-i18n="connect">Подключить</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:12px;color:var(--mu);margin-top:12px" data-i18n="tar_note">* Цены в сомах с учётом всех налогов. Start недоступен в г. Бишкек и в частном секторе.</p>
+      <div class="stitle" style="margin-top:48px" data-i18n="tar_tv_only">Только Цифровое ТВ</div>
       <div class="tg">
         <div class="tc">
-          <div class="tn">Семейный</div>
-          <div class="tp">395 <span>сом/мес</span></div>
-          <div class="ts2">150+</div><div class="tsl">телеканалов в HD</div>
+          <div class="tn" data-i18n="tc1_name">Семейный</div>
+          <div class="tp">395 <span data-i18n="per_mo">сом/мес</span></div>
+          <div class="ts2">150+</div><div class="tsl" data-i18n="tc_ch_hd">телеканалов в HD</div>
           <ul class="tf">
-            <li><span class="ck">✓</span>150 популярных каналов</li>
-            <li><span class="ck">✓</span>HD-качество изображения</li>
-            <li><span class="ck">✓</span>Детские каналы</li>
-            <li><span class="ck">✓</span>Родительский контроль</li>
-            <li><span class="ck">✓</span>Подключение в квартирах — 0 сом</li>
+            <li><span class="ck">✓</span><span data-i18n="tc1_f1">150 популярных каналов</span></li>
+            <li><span class="ck">✓</span><span data-i18n="tc1_f2">HD-качество изображения</span></li>
+            <li><span class="ck">✓</span><span data-i18n="tc1_f3">Детские каналы</span></li>
+            <li><span class="ck">✓</span><span data-i18n="tc1_f4">Родительский контроль</span></li>
+            <li><span class="ck">✓</span><span data-i18n="tc1_f5">Подключение в квартирах — 0 сом</span></li>
           </ul>
-          <button class="btt bto" onclick="show('contacts')">Подключить</button>
+          <button class="btt bto" onclick="show('contacts')" data-i18n="connect">Подключить</button>
         </div>
         <div class="tc pop">
-          <div class="popb">⭐ Популярный</div>
-          <div class="tn">Семейный Плюс</div>
-          <div class="tp">465 <span>сом/мес</span></div>
-          <div class="ts2">200+</div><div class="tsl">телеканалов в HD</div>
+          <div class="popb" data-i18n="popular">⭐ Популярный</div>
+          <div class="tn" data-i18n="tc2_name">Семейный Плюс</div>
+          <div class="tp">465 <span data-i18n="per_mo">сом/мес</span></div>
+          <div class="ts2">200+</div><div class="tsl" data-i18n="tc_ch_hd">телеканалов в HD</div>
           <ul class="tf">
-            <li><span class="ck">✓</span>200+ каналов</li>
-            <li><span class="ck">✓</span>Всё из тарифа «Семейный»</li>
-            <li><span class="ck">✓</span>Тематические каналы</li>
-            <li><span class="ck">✓</span>Запись передач на USB</li>
-            <li><span class="ck">✓</span>Пауза и перемотка ТВ</li>
+            <li><span class="ck">✓</span><span data-i18n="ch200">200+ каналов</span></li>
+            <li><span class="ck">✓</span><span data-i18n="tc2_f2">Всё из тарифа «Семейный»</span></li>
+            <li><span class="ck">✓</span><span data-i18n="tc2_f3">Тематические каналы</span></li>
+            <li><span class="ck">✓</span><span data-i18n="tc2_f4">Запись передач на USB</span></li>
+            <li><span class="ck">✓</span><span data-i18n="tc2_f5">Пауза и перемотка ТВ</span></li>
           </ul>
-          <button class="btt btp" onclick="show('contacts')">Подключить →</button>
+          <button class="btt btp" onclick="show('contacts')" data-i18n="connect_arrow">Подключить →</button>
         </div>
         <div class="tc">
-          <div class="tn">Частный сектор</div>
-          <div class="tp" style="font-size:26px">от 990 <span>сом/мес</span></div>
-          <div class="ts2" style="font-size:20px">60–600</div><div class="tsl">Мбит/с + ТВ</div>
+          <div class="tn" data-i18n="tc3_name">Частный сектор</div>
+          <div class="tp" style="font-size:26px">от 990 <span data-i18n="per_mo">сом/мес</span></div>
+          <div class="ts2" style="font-size:20px">60–600</div><div class="tsl" data-i18n="tc3_sub">Мбит/с + ТВ</div>
           <ul class="tf">
-            <li><span class="ck">✓</span>Подключение от 5 000 сом</li>
-            <li><span class="ck">✓</span>14 тестовых дней</li>
-            <li><span class="ck">✓</span>100% возврат если не устроит</li>
-            <li><span class="ck">✓</span>Транспорт сети 800 сом/мес</li>
-            <li><span class="ck">✓</span>Приставка в собственность</li>
+            <li><span class="ck">✓</span><span data-i18n="tc3_f1">Подключение от 5 000 сом</span></li>
+            <li><span class="ck">✓</span><span data-i18n="tc3_f2">14 тестовых дней</span></li>
+            <li><span class="ck">✓</span><span data-i18n="tc3_f3">100% возврат если не устроит</span></li>
+            <li><span class="ck">✓</span><span data-i18n="tc3_f4">Транспорт сети 800 сом/мес</span></li>
+            <li><span class="ck">✓</span><span data-i18n="tc3_f5">Приставка в собственность</span></li>
           </ul>
-          <button class="btt bto" onclick="show('contacts')">Узнать подробнее</button>
+          <button class="btt bto" onclick="show('contacts')" data-i18n="more_info">Узнать подробнее</button>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- TV PAGE -->
+<!-- ═══ ЦИФРОВОЕ ТВ ═══ -->
 <div id="tv" class="page">
   <div class="sec">
-    <div class="slbl2">Цифровое телевидение</div>
-    <div class="stitle">iTV АКНЕТ — 200+ каналов в HD</div>
+    <div class="slbl2" data-i18n="tv_lbl">Цифровое телевидение</div>
+    <div class="stitle" data-i18n="tv_title">iTV АКНЕТ — 200+ каналов в HD</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px">
       <div class="accia-card" style="margin-bottom:0">
-        <h2>Возможности iTV АКНЕТ</h2>
+        <h2 data-i18n="tv_feat_h">Возможности iTV АКНЕТ</h2>
         <ul class="accia-list">
-          <li><span class="ck">✓</span>Более 200 каналов: HD, фильмы, музыка, спорт, детские</li>
-          <li><span class="ck">✓</span>Запись передач на USB-носитель</li>
-          <li><span class="ck">✓</span>Пауза и перемотка прямого эфира</li>
-          <li><span class="ck">✓</span>Родительский контроль</li>
-          <li><span class="ck">✓</span>Профили: Папа, Мама, Семья</li>
-          <li><span class="ck">✓</span>Прогноз погоды, новости, гороскоп на экране ТВ</li>
-          <li><span class="ck">✓</span>Просмотр видео/фото/аудио через приставку</li>
-          <li><span class="ck">✓</span>Универсальный программируемый пульт</li>
-          <li><span class="ck">✓</span>ТВ-кредит на 3 дня</li>
+          <li><span class="ck">✓</span><span data-i18n="tv_f1">Более 200 каналов: HD, фильмы, музыка, спорт, детские</span></li>
+          <li><span class="ck">✓</span><span data-i18n="tv_f2">Запись передач на USB-носитель</span></li>
+          <li><span class="ck">✓</span><span data-i18n="tv_f3">Пауза и перемотка прямого эфира</span></li>
+          <li><span class="ck">✓</span><span data-i18n="tc1_f4">Родительский контроль</span></li>
+          <li><span class="ck">✓</span><span data-i18n="tv_f5">Профили: Папа, Мама, Семья</span></li>
+          <li><span class="ck">✓</span><span data-i18n="tv_f6">Прогноз погоды, новости, гороскоп на экране ТВ</span></li>
+          <li><span class="ck">✓</span><span data-i18n="tv_f7">Просмотр видео/фото/аудио через приставку</span></li>
+          <li><span class="ck">✓</span><span data-i18n="tv_f8">Универсальный программируемый пульт</span></li>
+          <li><span class="ck">✓</span><span data-i18n="tv_f9">ТВ-кредит на 3 дня</span></li>
         </ul>
       </div>
       <div>
         <div class="accia-card" style="margin-bottom:16px">
-          <h2 style="margin-bottom:16px">Тарифы ТВ</h2>
+          <h2 style="margin-bottom:16px" data-i18n="tv_tar_h">Тарифы ТВ</h2>
           <table class="ttable">
-            <thead><tr><th>Пакет</th><th>Каналов</th><th>Цена/мес</th></tr></thead>
+            <thead><tr><th data-i18n="th_pack">Пакет</th><th data-i18n="th_ch">Каналов</th><th data-i18n="th_price">Цена/мес</th></tr></thead>
             <tbody>
-              <tr><td>Семейный</td><td>150+</td><td class="price-tag">395 сом</td></tr>
-              <tr><td><strong>Семейный Плюс</strong></td><td><strong>200+</strong></td><td class="price-tag"><strong>465 сом</strong></td></tr>
+              <tr><td data-i18n="tc1_name">Семейный</td><td>150+</td><td class="price-tag">395 сом</td></tr>
+              <tr><td><strong data-i18n="tc2_name">Семейный Плюс</strong></td><td><strong>200+</strong></td><td class="price-tag"><strong>465 сом</strong></td></tr>
             </tbody>
           </table>
-          <p style="font-size:12px;color:var(--mu);margin-top:10px">Транспорт сети: 200 сом/мес (0 по акции). Подключение в квартирах — бесплатно.</p>
+          <p style="font-size:12px;color:var(--mu);margin-top:10px" data-i18n="tv_tar_note">Транспорт сети: 200 сом/мес (0 по акции). Подключение в квартирах — бесплатно.</p>
         </div>
         <div style="background:linear-gradient(135deg,#003d82,#0057B8);color:#fff;border-radius:14px;padding:20px;text-align:center">
-          <div style="font-size:28px;margin-bottom:8px">📺</div>
-          <div style="font-weight:800;font-size:16px;margin-bottom:6px">Приставка iPTV MAG-520</div>
+          <div style="font-size:36px;margin-bottom:8px">📺</div>
+          <div style="font-weight:800;font-size:16px;margin-bottom:6px" data-i18n="box_name">Приставка iPTV MAG-520</div>
           <div style="opacity:.8;font-size:13px;margin-bottom:12px">4K, Dolby Digital Plus, Android</div>
-          <div style="font-size:22px;font-weight:800;margin-bottom:12px">3 900 сом</div>
-          <button class="btn-w" style="width:100%" onclick="show('equip')">Подробнее</button>
+          <div style="font-size:24px;font-weight:800;margin-bottom:14px">3 900 сом</div>
+          <button class="btn-w" style="width:100%" onclick="show('equip')" data-i18n="more_info">Подробнее</button>
         </div>
       </div>
     </div>
-    <img src="https://aknet.kg/files/ikonki-televideniev.jpg" alt="Функции ТВ" style="width:100%;border-radius:12px;margin-top:8px;border:1.5px solid var(--bo)" onerror="this.style.display='none'">
+    <img src="https://aknet.kg/files/ikonki-televideniev.jpg" alt="Функции ТВ" style="width:100%;border-radius:12px;border:1.5px solid var(--bo)" onerror="this.style.display='none'">
   </div>
 </div>
 
-<!-- BUSINESS PAGE -->
+<!-- ═══ БИЗНЕС ═══ -->
 <div id="business" class="page">
   <div class="sec">
-    <div class="slbl2">Корпоративные решения</div>
-    <div class="stitle">АКНЕТ для бизнеса</div>
+    <div class="slbl2" data-i18n="biz_lbl">Корпоративные решения</div>
+    <div class="stitle" data-i18n="biz_title">АКНЕТ для бизнеса</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
       <div class="accia-card" style="margin-bottom:0">
-        <h2>VPN — Объединение офисов</h2>
-        <p style="font-size:13px;color:var(--mu);margin-bottom:16px">Закрытая корпоративная сеть по технологии VPN L2. Гарантированная скорость и конфиденциальность.</p>
+        <h2 data-i18n="vpn_h">VPN — Объединение офисов</h2>
+        <p style="font-size:13px;color:var(--mu);margin-bottom:16px" data-i18n="vpn_p">Закрытая корпоративная сеть по технологии VPN L2. Гарантированная скорость и конфиденциальность.</p>
         <table class="ttable">
-          <thead><tr><th>Скорость</th><th>Цена/мес (без НДС)</th></tr></thead>
+          <thead><tr><th data-i18n="th_speed">Скорость</th><th data-i18n="vpn_th2">Цена/мес (без НДС)</th></tr></thead>
           <tbody>
             <tr><td class="spd">10 Мбит/с</td><td class="price-tag">3 600 сом</td></tr>
             <tr><td class="spd">100 Мбит/с</td><td class="price-tag">5 600 сом</td></tr>
@@ -607,132 +293,101 @@ nav button:hover,nav button.active{background:var(--bl);color:var(--blue)}
         </table>
       </div>
       <div class="accia-card" style="margin-bottom:0">
-        <h2>IP-телефония</h2>
-        <p style="font-size:13px;color:var(--mu);margin-bottom:16px">Звонки по всему миру по 1.5 сом/мин. Сервис sip.aknet.kg</p>
+        <h2 data-i18n="sip_h">IP-телефония</h2>
+        <p style="font-size:13px;color:var(--mu);margin-bottom:16px" data-i18n="sip_p">Звонки по всему миру по 1.5 сом/мин. Сервис sip.aknet.kg</p>
         <table class="ttable">
-          <thead><tr><th>Страна</th><th>Цена (сом/мин)</th></tr></thead>
+          <thead><tr><th data-i18n="sip_th1">Страна</th><th data-i18n="sip_th2">Цена (сом/мин)</th></tr></thead>
           <tbody>
-            <tr><td>Россия, Казахстан, США, Канада</td><td class="price-tag">1,5</td></tr>
-            <tr><td>Великобритания, Германия, Франция</td><td class="price-tag">1,5</td></tr>
-            <tr><td>Китай, Япония, Южная Корея</td><td class="price-tag">1,5</td></tr>
-            <tr><td>Израиль, Австралия, Швейцария</td><td class="price-tag">1,5</td></tr>
+            <tr><td data-i18n="sip_c1">Россия, Казахстан, США, Канада</td><td class="price-tag">1,5</td></tr>
+            <tr><td data-i18n="sip_c2">Великобритания, Германия, Франция</td><td class="price-tag">1,5</td></tr>
+            <tr><td data-i18n="sip_c3">Китай, Япония, Южная Корея</td><td class="price-tag">1,5</td></tr>
+            <tr><td data-i18n="sip_c4">Израиль, Австралия, Швейцария</td><td class="price-tag">1,5</td></tr>
           </tbody>
         </table>
       </div>
     </div>
     <div class="accia-card" style="margin-top:24px">
-      <h2>☁️ Облачные сервисы</h2>
-      <p style="font-size:13px;color:var(--mu);margin-bottom:16px">Совместно с RackCorp (Австралия) — первый в Кыргызстане корпоративный облачный провайдер.</p>
+      <h2 data-i18n="cloud_h">☁️ Облачные сервисы</h2>
+      <p style="font-size:13px;color:var(--mu);margin-bottom:16px" data-i18n="cloud_p">Совместно с RackCorp (Австралия) — первый в Кыргызстане корпоративный облачный провайдер.</p>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
-        <div style="background:var(--bl);border-radius:10px;padding:14px;text-align:center"><div style="font-size:20px;margin-bottom:6px">🖥️</div><div style="font-size:13px;font-weight:700">Облачные серверы</div><div style="font-size:11px;color:var(--mu);margin-top:4px">Виртуальный сервер, VPS</div></div>
-        <div style="background:var(--bl);border-radius:10px;padding:14px;text-align:center"><div style="font-size:20px;margin-bottom:6px">🌐</div><div style="font-size:13px;font-weight:700">Web-хостинг</div><div style="font-size:11px;color:var(--mu);margin-top:4px">Сайты и серверы</div></div>
-        <div style="background:var(--bl);border-radius:10px;padding:14px;text-align:center"><div style="font-size:20px;margin-bottom:6px">📧</div><div style="font-size:13px;font-weight:700">Почтовые сервисы</div><div style="font-size:11px;color:var(--mu);margin-top:4px">Email, Exchange</div></div>
-        <div style="background:var(--bl);border-radius:10px;padding:14px;text-align:center"><div style="font-size:20px;margin-bottom:6px">💾</div><div style="font-size:13px;font-weight:700">Хранение данных</div><div style="font-size:11px;color:var(--mu);margin-top:4px">S3, Backup</div></div>
+        <div style="background:var(--bl);border-radius:10px;padding:14px;text-align:center"><div style="font-size:24px;margin-bottom:6px">🖥️</div><div style="font-size:13px;font-weight:700" data-i18n="cloud1_h">Облачные серверы</div><div style="font-size:11px;color:var(--mu);margin-top:4px" data-i18n="cloud1_p">Виртуальный сервер, VPS</div></div>
+        <div style="background:var(--bl);border-radius:10px;padding:14px;text-align:center"><div style="font-size:24px;margin-bottom:6px">🌐</div><div style="font-size:13px;font-weight:700" data-i18n="cloud2_h">Web-хостинг</div><div style="font-size:11px;color:var(--mu);margin-top:4px" data-i18n="cloud2_p">Сайты и серверы</div></div>
+        <div style="background:var(--bl);border-radius:10px;padding:14px;text-align:center"><div style="font-size:24px;margin-bottom:6px">📧</div><div style="font-size:13px;font-weight:700" data-i18n="cloud3_h">Почтовые сервисы</div><div style="font-size:11px;color:var(--mu);margin-top:4px" data-i18n="cloud3_p">Email, Exchange</div></div>
+        <div style="background:var(--bl);border-radius:10px;padding:14px;text-align:center"><div style="font-size:24px;margin-bottom:6px">💾</div><div style="font-size:13px;font-weight:700" data-i18n="cloud4_h">Хранение данных</div><div style="font-size:11px;color:var(--mu);margin-top:4px" data-i18n="cloud4_p">S3, Backup</div></div>
       </div>
     </div>
     <div style="background:var(--tx);color:#fff;border-radius:14px;padding:24px;margin-top:24px">
-      <strong style="font-size:15px">Корпоративный отдел:</strong>
+      <strong style="font-size:15px" data-i18n="corp_dept">Корпоративный отдел:</strong>
       <div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:10px;font-size:14px;opacity:.85">
-        <span>📧 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d0a3b1bcb5a390b1bbbeb5a4febbb7">[email&#160;protected]</a></span><span>📞 312 61 11 75</span><span>📞 770 99 97 73</span>
+        <span>📧 info@aknet.kg</span><span>📞 312 61 11 75</span><span>📞 770 99 97 73</span>
         <span>💬 WhatsApp/Telegram: 552 61 11 55</span>
       </div>
     </div>
   </div>
 </div>
 
-<!-- EQUIPMENT PAGE -->
+<!-- ═══ ОБОРУДОВАНИЕ ═══ -->
 <div id="equip" class="page">
   <div class="sec">
-    <div class="slbl2">Оборудование</div>
-    <div class="stitle">Роутеры, Mesh Wi-Fi и приставки</div>
+    <div class="slbl2" data-i18n="eq_lbl">Оборудование</div>
+    <div class="stitle" data-i18n="eq_title">Роутеры, Mesh Wi-Fi и приставки</div>
     <div class="eg">
-      <div class="ec">
-        <img src="https://www.aknet.kg/files/banners/routers/%D1%8164.jpg" alt="TP-Link C64" style="width:100%;height:140px;object-fit:contain;border-radius:8px;background:#f5f5f5;margin-bottom:14px" onerror="this.style.display='none'">
-        <h3>TP-Link Archer C64</h3>
-        <p>Wi-Fi 5 (AC1200), 4 антенны, Beamforming, MU-MIMO, 4×Gigabit LAN, WPA3</p>
-        <div class="price-pill">3 900 сом</div>
-      </div>
-      <div class="ec">
-        <img src="https://www.aknet.kg/files/banners/routers/AX12.jpg" alt="TP-Link AX12" style="width:100%;height:140px;object-fit:contain;border-radius:8px;background:#f5f5f5;margin-bottom:14px" onerror="this.style.display='none'">
-        <h3>TP-Link Archer AX12</h3>
-        <p>Wi-Fi 6 (AX1500), OFDMA, MU-MIMO, 3×Gigabit LAN, WPA3, TWT</p>
-        <div class="price-pill">4 200 сом</div>
-      </div>
-      <div class="ec">
-        <img src="https://aknet.kg/files/banners/routers/tplinkDecoM4.png" alt="Deco M4" style="width:100%;height:140px;object-fit:contain;border-radius:8px;background:#f5f5f5;margin-bottom:14px" onerror="this.style.display='none'">
-        <h3>Mesh Wi-Fi TP-Link Deco M4</h3>
-        <p>AC1200, бесшовный роуминг, родительский контроль, 2×Gigabit Ethernet на модуль</p>
-        <div class="price-pill">8 500 сом</div>
-      </div>
-      <div class="ec">
-        <img src="https://aknet.kg/files/banners/routers/tplinkDecoE4.png" alt="Deco E4" style="width:100%;height:140px;object-fit:contain;border-radius:8px;background:#f5f5f5;margin-bottom:14px" onerror="this.style.display='none'">
-        <h3>Mesh Wi-Fi TP-Link Deco E4</h3>
-        <p>AC1200, бесшовный роуминг, двухдиапазонный Wi-Fi, простая настройка через приложение</p>
-        <div class="price-pill">6 500 сом</div>
-      </div>
-      <div class="ec">
-        <img src="https://www.aknet.kg/files/Mag520.jpg" alt="iPTV" style="width:100%;height:140px;object-fit:contain;border-radius:8px;background:#f5f5f5;margin-bottom:14px" onerror="this.style.display='none'">
-        <h3>iPTV Приставка MAG-520</h3>
-        <p>Android, 4K 60fps, Dolby Digital Plus, 4-ядерный процессор, 200+ каналов</p>
-        <div class="price-pill">3 900 сом</div>
-      </div>
-      <div class="ec">
-        <img src="https://www.aknet.kg/files/pictures/mercusys.jpg" alt="Mercusys" style="width:100%;height:140px;object-fit:contain;border-radius:8px;background:#f5f5f5;margin-bottom:14px" onerror="this.style.display='none'">
-        <h3>Коммутатор Mercusys MS105G</h3>
-        <p>5×Gigabit Ethernet, Plug&amp;Play, энергосбережение до 82%, для дома и офиса</p>
-        <div class="price-pill">1 500 сом</div>
-      </div>
+      <div class="ec"><img src="https://www.aknet.kg/files/banners/routers/%D1%8164.jpg" alt="TP-Link C64" style="width:100%;height:140px;object-fit:contain;border-radius:8px;background:#f5f5f5;margin-bottom:14px" onerror="this.style.display='none'"><h3>TP-Link Archer C64</h3><p>Wi-Fi 5 (AC1200), 4 антенны, Beamforming, MU-MIMO, 4×Gigabit LAN, WPA3</p><div class="price-pill">3 900 сом</div></div>
+      <div class="ec"><img src="https://www.aknet.kg/files/banners/routers/AX12.jpg" alt="TP-Link AX12" style="width:100%;height:140px;object-fit:contain;border-radius:8px;background:#f5f5f5;margin-bottom:14px" onerror="this.style.display='none'"><h3>TP-Link Archer AX12</h3><p>Wi-Fi 6 (AX1500), OFDMA, MU-MIMO, 3×Gigabit LAN, WPA3, TWT</p><div class="price-pill">4 200 сом</div></div>
+      <div class="ec"><img src="https://aknet.kg/files/banners/routers/tplinkDecoM4.png" alt="Deco M4" style="width:100%;height:140px;object-fit:contain;border-radius:8px;background:#f5f5f5;margin-bottom:14px" onerror="this.style.display='none'"><h3>Mesh Wi-Fi TP-Link Deco M4</h3><p>AC1200, бесшовный роуминг, родительский контроль, 2×Gigabit Ethernet</p><div class="price-pill">8 500 сом</div></div>
+      <div class="ec"><img src="https://aknet.kg/files/banners/routers/tplinkDecoE4.png" alt="Deco E4" style="width:100%;height:140px;object-fit:contain;border-radius:8px;background:#f5f5f5;margin-bottom:14px" onerror="this.style.display='none'"><h3>Mesh Wi-Fi TP-Link Deco E4</h3><p>AC1200, бесшовный роуминг, двухдиапазонный Wi-Fi</p><div class="price-pill">6 500 сом</div></div>
+      <div class="ec"><img src="https://www.aknet.kg/files/Mag520.jpg" alt="iPTV" style="width:100%;height:140px;object-fit:contain;border-radius:8px;background:#f5f5f5;margin-bottom:14px" onerror="this.style.display='none'"><h3 data-i18n="box_name">Приставка iPTV MAG-520</h3><p>Android, 4K 60fps, Dolby Digital Plus, 4-ядерный процессор, 200+ каналов</p><div class="price-pill">3 900 сом</div></div>
+      <div class="ec"><img src="https://www.aknet.kg/files/pictures/mercusys.jpg" alt="Mercusys" style="width:100%;height:140px;object-fit:contain;border-radius:8px;background:#f5f5f5;margin-bottom:14px" onerror="this.style.display='none'"><h3 data-i18n="eq_sw_h">Коммутатор Mercusys MS105G</h3><p>5×Gigabit Ethernet, Plug&amp;Play, энергосбережение до 82%</p><div class="price-pill">1 500 сом</div></div>
     </div>
     <div style="margin-top:24px;background:var(--bl);border-radius:12px;padding:18px;font-size:13px;color:var(--mu)">
-      <strong style="color:var(--tx)">Примечание:</strong> Приставка переходит в собственность абонента. При выкупе 2-й приставки: 3 900 сом, абонплата 0 сом. Подключение 2-й приставки в квартирах при повторном подключении: 500 сом.
+      <strong style="color:var(--tx)" data-i18n="note">Примечание:</strong> <span data-i18n="eq_note">Приставка переходит в собственность абонента. При выкупе 2-й приставки: 3 900 сом, абонплата 0 сом.</span>
     </div>
   </div>
 </div>
 
-<!-- AKCIA PAGE -->
+<!-- ═══ АКЦИЯ ═══ -->
 <div id="akcia" class="page">
   <div class="sec">
-    <div class="slbl2">Специальное предложение</div>
-    <div class="stitle">🌸 Весна с АКНЕТ — 1 месяц бесплатно!</div>
+    <div class="slbl2" data-i18n="ak_lbl">Специальное предложение</div>
+    <div class="stitle" data-i18n="ak_title">🌸 Весна с АКНЕТ — 1 месяц бесплатно!</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
       <div>
         <div class="accia-card" style="margin-bottom:24px">
           <img src="files/vesna.png" alt="Весна с АКНЕТ" style="width:100%;border-radius:10px;margin-bottom:16px" onerror="this.style.display='none'">
-          <h2>Акция «Весна с АКНЕТ»</h2>
-          <p style="font-size:14px;color:var(--mu);margin:10px 0">С 16 марта по 31 мая 2026 года АКНЕТ запускает специальную акцию для новых абонентов — подключитесь и получите первый месяц пользования услугами <strong>бесплатно</strong>.</p>
+          <h2 data-i18n="ak_h">Акция «Весна с АКНЕТ»</h2>
+          <p style="font-size:14px;color:var(--mu);margin:10px 0" data-i18n="ak_p">С 16 марта по 31 мая 2026 года АКНЕТ запускает специальную акцию — подключитесь и получите первый месяц <strong>бесплатно</strong>.</p>
           <ul class="accia-list">
-            <li><span class="ck">✓</span>Доступно на тарифы Интернет и Интернет + ТВ</li>
-            <li><span class="ck">✓</span>Для жителей квартир и частного сектора</li>
-            <li><span class="ck">✓</span>По всей сети АКНЕТ</li>
-            <li><span class="ck">✓</span>Только для новых абонентов при первичном подключении</li>
+            <li><span class="ck">✓</span><span data-i18n="ak_f1">Доступно на тарифы Интернет и Интернет + ТВ</span></li>
+            <li><span class="ck">✓</span><span data-i18n="ak_f2">Для жителей квартир и частного сектора</span></li>
+            <li><span class="ck">✓</span><span data-i18n="ak_f3">По всей сети АКНЕТ</span></li>
+            <li><span class="ck">✓</span><span data-i18n="ak_f4">Только для новых абонентов при первичном подключении</span></li>
           </ul>
         </div>
         <div class="accia-card" style="background:linear-gradient(135deg,#f0fff4,#e8f5e9)">
-          <h2 style="color:#16a34a">ТВ по акции: транспорт бесплатно!</h2>
-          <p style="font-size:13px;color:var(--mu);margin:10px 0">Цифровое телевидение от 395 сом/мес без оплаты транспорта сети 200 сом/мес!</p>
+          <h2 style="color:#16a34a" data-i18n="ak_tv_h">ТВ по акции: транспорт бесплатно!</h2>
+          <p style="font-size:13px;color:var(--mu);margin:10px 0" data-i18n="ak_tv_p">Цифровое телевидение от 395 сом/мес без оплаты транспорта сети 200 сом/мес!</p>
           <div style="font-size:28px;font-weight:800;color:#16a34a">395 сом/мес</div>
-          <div style="font-size:13px;color:var(--mu)">вместо 595 сом/мес — экономия 200 сом</div>
+          <div style="font-size:13px;color:var(--mu)" data-i18n="ak_tv_save">вместо 595 сом/мес — экономия 200 сом</div>
         </div>
       </div>
       <div>
         <div class="accia-card" style="margin-bottom:24px">
-          <h2>Как подключиться</h2>
+          <h2 data-i18n="ak_how_h">Как подключиться</h2>
           <ul class="accia-list">
-            <li><span class="step">1</span>Оставьте заявку с 16 марта по 31 мая 2026 года</li>
-            <li><span class="step">2</span>Выберите подходящий тариф (Интернет или ТВ+Интернет)</li>
-            <li><span class="step">3</span>Первый месяц начисляется автоматически после подключения</li>
+            <li><span class="step">1</span><span data-i18n="ak_s1">Оставьте заявку с 16 марта по 31 мая 2026 года</span></li>
+            <li><span class="step">2</span><span data-i18n="ak_s2">Выберите подходящий тариф (Интернет или ТВ+Интернет)</span></li>
+            <li><span class="step">3</span><span data-i18n="ak_s3">Первый месяц начисляется автоматически после подключения</span></li>
           </ul>
           <div style="margin-top:20px;background:var(--bl);border-radius:10px;padding:16px">
-            <strong style="font-size:14px">По вопросам обращайтесь:</strong>
+            <strong style="font-size:14px" data-i18n="ak_contact">По вопросам обращайтесь:</strong>
             <div style="margin-top:10px;font-size:14px;display:flex;flex-direction:column;gap:6px">
-              <span>📞 550 61 11 55</span>
-              <span>💬 WhatsApp/Telegram: 552 61 11 55</span>
+              <span>📞 550 61 11 55</span><span>💬 WhatsApp/Telegram: 552 61 11 55</span>
             </div>
           </div>
         </div>
-        <div class="manas-banner">
-          <h2>🏔 Подключение в г. Манас</h2>
-          <p>Свяжитесь с нашим менеджером по городу Манас напрямую:</p>
+        <div class="manas-banner" style="margin-bottom:0">
+          <h2 data-i18n="ak_manas_h">🏔 Подключение в г. Манас</h2>
+          <p data-i18n="ak_manas_p">Свяжитесь с нашим менеджером по городу Манас напрямую:</p>
           <div class="phone-big">📞 0555 611 004</div>
         </div>
       </div>
@@ -740,143 +395,117 @@ nav button:hover,nav button.active{background:var(--bl);color:var(--blue)}
   </div>
 </div>
 
-<!-- CONTACTS PAGE -->
+<!-- ═══ КОНТАКТЫ ═══ -->
 <div id="contacts" class="page">
   <div class="sec">
-    <div class="slbl2">Контакты</div>
-    <div class="stitle">Офисы и менеджеры</div>
-
+    <div class="slbl2" data-i18n="ct_lbl">Контакты</div>
+    <div class="stitle" data-i18n="ct_title">Офисы и менеджеры</div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:32px">
-      <!-- MANAS -->
       <div style="background:linear-gradient(135deg,#F7941D,#e67e00);color:#fff;border-radius:16px;padding:24px;position:relative;overflow:hidden">
-        <div style="position:absolute;right:10px;bottom:-10px;font-size:60px;opacity:.2">🏔</div>
-        <div style="font-size:11px;font-weight:700;opacity:.75;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">Новое направление</div>
-        <div style="font-size:18px;font-weight:800;margin-bottom:12px">г. Манас</div>
-        <div style="font-size:13px;opacity:.9;margin-bottom:14px">Менеджер по г. Манас</div>
+        <div style="position:absolute;right:10px;bottom:-10px;font-size:60px;opacity:.2;pointer-events:none">🏔</div>
+        <div style="font-size:11px;font-weight:700;opacity:.75;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px" data-i18n="ct_new_dir">Новое направление</div>
+        <div style="font-size:18px;font-weight:800;margin-bottom:12px" data-i18n="ct_manas">г. Манас</div>
+        <div style="font-size:13px;opacity:.9;margin-bottom:14px" data-i18n="ct_manas_mgr">Менеджер по г. Манас</div>
         <a href="tel:+996555611004" style="font-size:20px;font-weight:800;color:#fff;text-decoration:none;display:block;background:rgba(255,255,255,.2);padding:10px 16px;border-radius:10px;margin-bottom:8px">📞 0555 611 004</a>
         <div style="font-size:12px;opacity:.8">WhatsApp</div>
       </div>
-      <!-- BISHKEK -->
       <div class="accia-card" style="margin-bottom:0">
-        <div style="font-size:18px;font-weight:800;color:var(--blue);margin-bottom:12px">г. Бишкек</div>
+        <div style="font-size:18px;font-weight:800;color:var(--blue);margin-bottom:12px" data-i18n="ct_bish">г. Бишкек</div>
         <div style="font-size:13px;margin-bottom:6px">📞 <a href="tel:+996312611155" style="color:var(--tx);text-decoration:none">+996 (312) 61 11 55</a></div>
         <div style="font-size:13px;margin-bottom:14px">📞 <a href="tel:+996550611155" style="color:var(--tx);text-decoration:none">+996 (550) 61 11 55</a></div>
         <div style="font-size:12px;color:var(--mu);margin-bottom:6px">📍 ул. Ахунбаева, 119A</div>
-        <div style="font-size:12px;color:var(--mu);margin-bottom:6px">Пн–Пт: 9:00–18:00 | Сб: 10:00–16:00</div>
+        <div style="font-size:12px;color:var(--mu);margin-bottom:6px" data-i18n="ct_bish_h1">Пн–Пт: 9:00–18:00 | Сб: 10:00–16:00</div>
         <div style="font-size:12px;color:var(--mu);margin-bottom:6px">📍 ЦУМ «Айчурек», пр. Чуй, 155</div>
-        <div style="font-size:12px;color:var(--mu)">Пн–Вс: 10:00–20:00</div>
+        <div style="font-size:12px;color:var(--mu)" data-i18n="ct_bish_h2">Пн–Вс: 10:00–20:00</div>
       </div>
-      <!-- OSH -->
       <div class="accia-card" style="margin-bottom:0">
-        <div style="font-size:18px;font-weight:800;color:var(--blue);margin-bottom:12px">г. Ош</div>
+        <div style="font-size:18px;font-weight:800;color:var(--blue);margin-bottom:12px" data-i18n="ct_osh">г. Ош</div>
         <div style="font-size:13px;margin-bottom:6px">📞 <a href="tel:+99632226020" style="color:var(--tx);text-decoration:none">+996 (3222) 6 20 20</a></div>
         <div style="font-size:13px;margin-bottom:14px">📞 <a href="tel:+996999611155" style="color:var(--tx);text-decoration:none">+996 (999) 61 11 55</a></div>
         <div style="font-size:12px;color:var(--mu);margin-bottom:6px">📍 пр. Масалиева, 67</div>
-        <div style="font-size:12px;color:var(--mu);margin-bottom:6px">Пн–Пт: 8:00–18:00</div>
-        <div style="font-size:12px;color:var(--mu);margin-bottom:6px">Сб–Вс: 8:00–17:00</div>
-        <div style="font-size:12px;color:var(--mu)">📧 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fe8c9b99979190be9f95909b8ad09599">[email&#160;protected]</a></div>
+        <div style="font-size:12px;color:var(--mu);margin-bottom:6px" data-i18n="ct_osh_h1">Пн–Пт: 8:00–18:00</div>
+        <div style="font-size:12px;color:var(--mu)" data-i18n="ct_osh_h2">Сб–Вс: 8:00–17:00</div>
       </div>
     </div>
-
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
       <div class="accia-card" style="margin-bottom:0">
-        <h2>Почта</h2>
+        <h2 data-i18n="ct_mail_h">Почта</h2>
         <table style="width:100%;font-size:13px;margin-top:12px">
-          <tr><td style="color:var(--mu);padding:6px 0">Коммерческий блок</td><td><a href="/cdn-cgi/l/email-protection#1b687a777e685b7a70757e6f35707c" style="color:var(--blue)"><span class="__cf_email__" data-cfemail="e99a88858c9aa98882878c9dc7828e">[email&#160;protected]</span></a></td></tr>
-          <tr><td style="color:var(--mu);padding:6px 0">Техподдержка</td><td><a href="/cdn-cgi/l/email-protection#dcafa9acacb3aea89cbdb7b2b9a8f2b7bb" style="color:var(--blue)"><span class="__cf_email__" data-cfemail="fa898f8a8a95888eba9b91949f8ed4919d">[email&#160;protected]</span></a></td></tr>
-          <tr><td style="color:var(--mu);padding:6px 0">Маркетинг</td><td><a href="/cdn-cgi/l/email-protection#cda0acbfa6a8b9a4a3aa8daca6a3a8b9e3a6aa" style="color:var(--blue)"><span class="__cf_email__" data-cfemail="0964687b626c7d60676e496862676c7d27626e">[email&#160;protected]</span></a></td></tr>
-          <tr><td style="color:var(--mu);padding:6px 0">Регионы</td><td><a href="/cdn-cgi/l/email-protection#c6b4a3a1afa9a886a7ada8a3b2e8ada1" style="color:var(--blue)"><span class="__cf_email__" data-cfemail="a7d5c2c0cec8c9e7c6ccc9c2d389ccc0">[email&#160;protected]</span></a></td></tr>
-          <tr><td style="color:var(--mu);padding:6px 0">Операторы</td><td><a href="/cdn-cgi/l/email-protection#d6a0bfa696b7bdb8b3a2f8bdb1" style="color:var(--blue)"><span class="__cf_email__" data-cfemail="8ff9e6ffcfeee4e1eafba1e4e8">[email&#160;protected]</span></a></td></tr>
+          <tr><td style="color:var(--mu);padding:6px 0" data-i18n="ct_m1">Коммерческий блок</td><td><a href="mailto:info@aknet.kg" style="color:var(--blue)">info@aknet.kg</a></td></tr>
+          <tr><td style="color:var(--mu);padding:6px 0" data-i18n="ct_m2">Техподдержка</td><td><a href="mailto:support@aknet.kg" style="color:var(--blue)">support@aknet.kg</a></td></tr>
+          <tr><td style="color:var(--mu);padding:6px 0" data-i18n="ct_m3">Маркетинг</td><td><a href="mailto:marketing@aknet.kg" style="color:var(--blue)">marketing@aknet.kg</a></td></tr>
+          <tr><td style="color:var(--mu);padding:6px 0" data-i18n="ct_m4">Регионы</td><td><a href="mailto:regions@aknet.kg" style="color:var(--blue)">regions@aknet.kg</a></td></tr>
+          <tr><td style="color:var(--mu);padding:6px 0" data-i18n="ct_m5">Операторы</td><td><a href="mailto:noc@aknet.kg" style="color:var(--blue)">noc@aknet.kg</a></td></tr>
         </table>
       </div>
       <div class="accia-card" style="margin-bottom:0">
-        <h2>Чат-поддержка 24/7</h2>
+        <h2 data-i18n="ct_chat_h">Чат-поддержка 24/7</h2>
         <div style="margin-top:14px;display:flex;flex-direction:column;gap:10px">
-          <a href="https://wa.me/996552611155" style="display:flex;align-items:center;gap:10px;background:#25D366;color:#fff;padding:12px 16px;border-radius:10px;text-decoration:none;font-weight:700">
-            <span style="font-size:20px">💬</span> WhatsApp: 0552 61 11 55
-          <a href="https://wa.me/996555611004" style="display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#F7941D,#e67e00);color:#fff;padding:12px 16px;border-radius:10px;text-decoration:none;font-weight:700">
-            <span style="font-size:20px">🏔</span> Манас — WhatsApp: 0555 611 004
-          </a>
+          <a href="https://wa.me/996552611155" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;background:#25D366;color:#fff;padding:12px 16px;border-radius:10px;text-decoration:none;font-weight:700"><span style="font-size:20px">💬</span> WhatsApp: 0552 61 11 55</a>
+          <a href="https://wa.me/996555611004" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#F7941D,#e67e00);color:#fff;padding:12px 16px;border-radius:10px;text-decoration:none;font-weight:700"><span style="font-size:20px">🏔</span><span data-i18n="ct_manas_wa">Манас — WhatsApp: 0555 611 004</span></a>
         </div>
       </div>
     </div>
-
     <div class="bwid" style="margin-top:24px">
-      <h3>💳 Узнать баланс лицевого счёта</h3>
+      <h3 data-i18n="bal_h">💳 Узнать баланс лицевого счёта</h3>
       <div class="ig">
-        <input type="text" placeholder="Введите номер лицевого счёта...">
-        <button>Проверить</button>
+        <input type="text" data-i18n-ph="bal_ph" placeholder="Введите номер лицевого счёта..." onkeydown="if(event.key==='Enter')checkBalance(this)">
+        <button onclick="checkBalance(this)" data-i18n="bal_btn">Проверить</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- FOOTER -->
+<!-- ═══ ФУТЕР ═══ -->
 <footer class="csec">
   <div class="cin">
     <div class="cbrand">
-      <img src="https://aknet.kg/ima/header/logo.png?v=64693cce" alt="Акнет" style="height:30px;filter:brightness(0) invert(1);margin-bottom:12px;display:block" onerror="this.style.display='none'">
-      <p>Ведущий интернет-провайдер Кыргызстана. Более 20 лет надёжной связи для дома и бизнеса.<br><br>Лиц. ГАС №17-0110 КР // №00-110 КР</p>
+      <img src="https://aknet.kg/ima/header/logo.png?v=64693cce" alt="АКНЕТ" style="height:30px;filter:brightness(0) invert(1);margin-bottom:12px;display:block" onerror="this.style.display='none'">
+      <p data-i18n="footer_about">Ведущий интернет-провайдер Кыргызстана. Более 20 лет надёжной связи для дома и бизнеса.<br><br>Лиц. ГАС №17-0110 КР // №00-110 КР</p>
       <div class="soc" style="margin-top:14px">
-        <a class="sb" href="https://www.instagram.com/aknet_official" target="_blank">📷</a>
-        <a class="sb" href="https://www.facebook.com/aknetkg" target="_blank">👥</a>
-        <a class="sb" href="https://twitter.com/Aknet_KG" target="_blank">🐦</a>
-        <a class="sb" href="https://vk.com/itv_aknet" target="_blank">💬</a>
+        <a class="sb" href="https://www.instagram.com/aknet_official" target="_blank" rel="noopener" aria-label="Instagram">📷</a>
+        <a class="sb" href="https://www.facebook.com/aknetkg" target="_blank" rel="noopener" aria-label="Facebook">👥</a>
+        <a class="sb" href="https://twitter.com/Aknet_KG" target="_blank" rel="noopener" aria-label="Twitter">🐦</a>
+        <a class="sb" href="https://vk.com/itv_aknet" target="_blank" rel="noopener" aria-label="ВКонтакте">💬</a>
       </div>
     </div>
     <div class="cc">
-      <h4>г. Манас</h4>
+      <h4 data-i18n="ct_manas">г. Манас</h4>
       <div class="manas-highlight">
-        <div class="city">Менеджер по г. Манас</div>
+        <div class="city" data-i18n="ct_manas_mgr">Менеджер по г. Манас</div>
         <a href="tel:+996555611004">📞 0555 611 004</a>
-	<h4 style="margin-top:14px">Чат 24/7</h4>
- 	<a href="https://wa.me/996555611004">WhatsApp: 0555 611 004</a>
+        <h4 style="margin-top:10px" data-i18n="ct_chat_h">Чат 24/7</h4>
+        <a href="https://wa.me/996555611004" target="_blank" rel="noopener">WhatsApp: 0555 611 004</a>
       </div>
-      <h4>г. Бишкек</h4>
+      <h4 data-i18n="ct_bish">г. Бишкек</h4>
       <a href="tel:+996312611155">+996 (312) 61 11 55</a>
       <a href="tel:+996550611155">+996 (550) 61 11 55</a>
     </div>
     <div class="cc">
-      <h4>г. Ош</h4>
+      <h4 data-i18n="ct_osh">г. Ош</h4>
       <a href="tel:+99632226020">+996 (3222) 6 20 20</a>
       <a href="tel:+996999611155">+996 (999) 61 11 55</a>
-      <p>пр. Масалиева, 67</p>
+      <p>📍 пр. Масалиева, 67</p>
     </div>
     <div class="cc">
-      <h4>Почта</h4>
-      <a href="/cdn-cgi/l/email-protection#6d1e0c01081e2d0c0603081943060a"><span class="__cf_email__" data-cfemail="64170508011724050f0a01104a0f03">[email&#160;protected]</span></a>
-      <a href="/cdn-cgi/l/email-protection#75060005051a070135141e1b10015b1e12"><span class="__cf_email__" data-cfemail="077472777768757347666c696273296c60">[email&#160;protected]</span></a>
-      <a href="/cdn-cgi/l/email-protecti
-</div>
-</div>
-<div class="fbar" style="padding:20px">© 2026 АО «Акнет». Все права защищены.</div>
+      <h4 data-i18n="ct_mail_h">Почта</h4>
+      <a href="mailto:info@aknet.kg">info@aknet.kg</a>
+      <a href="mailto:support@aknet.kg">support@aknet.kg</a>
+      <h4 style="margin-top:12px">Навигация</h4>
+      <a href="#" onclick="show('tariffs')" data-i18n="nav_tariffs">Тарифы</a>
+      <a href="#" onclick="show('tv')" data-i18n="nav_tv">Цифровое ТВ</a>
+      <a href="#" onclick="show('contacts')" data-i18n="nav_contacts">Контакты</a>
+    </div>
+  </div>
+  <div class="fbar">
+    <span data-i18n="footer_copy">© 2026 АО «Акнет». Все права защищены.</span>
+    <span>🇰🇬 Кыргызская Республика</span>
+  </div>
+</footer>
 
-<script>
-function show(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  var el=document.getElementById(id);
-  if(el){el.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
-  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('nav button').forEach(b=>{
-    var fn=b.getAttribute('onclick')||'';
-    if(fn.includes("'"+id+"'")){b.classList.add('active');}
-  });
-}
-function toggleMenu(){
-  var b=document.getElementById('burger');
-  var m=document.getElementById('mobMenu');
-  var o=document.getElementById('mobNav');
-  b.classList.toggle('open');
-  m.classList.toggle('open');
-  o.classList.toggle('open');
-  document.body.style.overflow=m.classList.contains('open')?'hidden':'';
-}
-function closeMenu(){
-  document.getElementById('burger').classList.remove('open');
-  document.getElementById('mobMenu').classList.remove('open');
-  document.getElementById('mobNav').classList.remove('open');
-  document.body.style.overflow='';
-}
-</script>
+<!-- Скрипты (загружаются после контента) -->
+<script src="js/i18n.js"></script>
+<script src="js/app.js"></script>
+
 </body>
 </html>

@@ -1,0 +1,287 @@
+/* =====================================================
+   АКНЕТ — Шапка и навигация
+   ===================================================== */
+
+/* ─── Header ─── */
+header {
+    background: var(--wh);
+    border-bottom: 1.5px solid var(--bo);
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    box-shadow: 0 2px 12px rgba(0, 87, 184, .07);
+}
+
+.hi {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    gap: 12px;
+}
+
+/* ─── Логотип ─── */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.logo img {
+    height: 34px;
+    object-fit: contain;
+    display: block;
+}
+
+.logo-fb {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--blue);
+    letter-spacing: -1px;
+    display: none;
+}
+
+/* ─── Навигация ─── */
+nav {
+    display: flex;
+    gap: 4px;
+    flex-wrap: nowrap;
+}
+
+nav button {
+    border: none;
+    background: none;
+    color: var(--mu);
+    font-weight: 600;
+    font-size: 13px;
+    padding: 7px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: var(--font);
+    transition: all .2s;
+    white-space: nowrap;
+}
+
+nav button:hover,
+nav button.active {
+    background: var(--bl);
+    color: var(--blue);
+}
+
+/* ─── Действия шапки ─── */
+.ha {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.ph {
+    background: var(--bl);
+    color: var(--blue);
+    padding: 7px 13px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 13px;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.bo-btn {
+    border: 1.5px solid var(--blue);
+    color: var(--blue);
+    background: transparent;
+    padding: 7px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all .2s;
+    font-family: var(--font);
+    white-space: nowrap;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.bo-btn:hover {
+    background: var(--blue);
+    color: #fff;
+}
+
+/* ─── Переключатель языка ─── */
+.lang-sw {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    background: var(--bl);
+    border-radius: 8px;
+    padding: 3px;
+    margin-right: 4px;
+    flex-shrink: 0;
+}
+
+.lang-sw button {
+    border: none;
+    background: none;
+    font-weight: 700;
+    font-size: 12px;
+    padding: 4px 9px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: var(--font);
+    color: var(--mu);
+    transition: all .2s;
+}
+
+.lang-sw button.active {
+    background: #fff;
+    color: var(--blue);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .12);
+}
+
+/* ─── Гамбургер ─── */
+.burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    gap: 5px;
+    padding: 4px;
+    border-radius: 8px;
+    transition: background .2s;
+    flex-shrink: 0;
+}
+
+.burger:hover {
+    background: var(--bl);
+}
+
+.burger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--tx);
+    border-radius: 2px;
+    transition: all .3s;
+}
+
+.burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ─── Мобильное меню ─── */
+.mob-nav {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .45);
+    z-index: 150;
+    backdrop-filter: blur(2px);
+}
+
+.mob-nav.open {
+    display: block;
+}
+
+.mob-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 290px;
+    height: 100%;
+    background: #fff;
+    z-index: 160;
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform .3s ease;
+    box-shadow: -4px 0 28px rgba(0, 0, 0, .15);
+}
+
+.mob-menu.open {
+    transform: translateX(0);
+}
+
+.mob-menu-head {
+    padding: 14px 20px 18px;
+    border-bottom: 1px solid var(--bo);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mob-close {
+    border: none;
+    background: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: var(--mu);
+    line-height: 1;
+    padding: 4px;
+    border-radius: 6px;
+    transition: background .2s;
+}
+
+.mob-close:hover {
+    background: var(--bl);
+}
+
+.mob-menu nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 12px;
+}
+
+.mob-menu nav button {
+    text-align: left;
+    padding: 12px 14px;
+    font-size: 15px;
+    border-radius: 10px;
+    width: 100%;
+    justify-content: flex-start;
+}
+
+.mob-menu-bottom {
+    padding: 12px;
+    border-top: 1px solid var(--bo);
+    margin-top: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.mob-menu-bottom .ph {
+    display: block;
+    text-align: center;
+}
+
+.mob-menu-bottom .bo-btn {
+    width: 100%;
+    justify-content: center;
+}
+
+.mob-lang {
+    padding: 0 12px 4px;
+}
+
+.mob-lang .lang-sw {
+    width: 100%;
+    margin-right: 0;
+}
+
+.mob-lang .lang-sw button {
+    flex: 1;
+    text-align: center;
+}

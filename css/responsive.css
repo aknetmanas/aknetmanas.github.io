@@ -1,0 +1,151 @@
+/* =====================================================
+   АКНЕТ — Адаптивные стили
+   Breakpoints:
+     Desktop  > 1024px  (базовые стили)
+     Tablet   769–1024px
+     Mobile   ≤ 768px
+     Small    ≤ 400px
+   ===================================================== */
+
+/* ═══════════════════════════════════════════════════
+   ПЛАНШЕТ  769px – 1024px
+   ═══════════════════════════════════════════════════ */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+    /* Шапка */
+    .hi { padding: 0 16px; }
+    nav button { font-size: 12px; padding: 6px 8px; }
+    .ph  { font-size: 12px; padding: 6px 10px; }
+    .bo-btn { font-size: 12px; padding: 6px 12px; }
+
+    /* Hero */
+    .hero-in { gap: 24px; }
+    .hero h1 { font-size: 30px; }
+
+    /* Сетки */
+    .sg { grid-template-columns: repeat(2, 1fr); }
+    .ng { grid-template-columns: repeat(2, 1fr); }
+    .eg { grid-template-columns: repeat(2, 1fr); }
+    .tg { grid-template-columns: repeat(2, 1fr); }
+
+    /* Футер */
+    .cin { grid-template-columns: 1fr 1fr; gap: 24px; }
+
+    /* Промо */
+    .promo { padding: 28px 28px; }
+    .promo img { height: 80px; }
+    .promo h2 { font-size: 20px; }
+
+    /* Контакты inline-grids */
+    [style*="grid-template-columns:repeat(3,1fr)"]  { grid-template-columns: 1fr 1fr !important; }
+    [style*="grid-template-columns:1fr 1fr"]         { grid-template-columns: 1fr !important; }
+    [style*="grid-template-columns:repeat(4,1fr)"]  { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+/* ═══════════════════════════════════════════════════
+   МОБИЛЬНЫЙ  ≤ 768px
+   ═══════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+    /* ── Шапка ── */
+    nav    { display: none; }
+    .ha    { display: none; }
+    .burger { display: flex; }
+
+    .hi { height: 56px; padding: 0 14px; }
+    .logo img { height: 28px; }
+
+    /* ── Hero ── */
+    .hero { padding: 36px 16px 44px; }
+    .hero-in { grid-template-columns: 1fr; gap: 28px; }
+    .hero h1 { font-size: 26px; }
+    .hero p  { font-size: 14px; max-width: 100%; }
+
+    .hbtns { flex-direction: column; gap: 10px; }
+    .hbtns .btn-p,
+    .hbtns .btn-w { width: 100%; justify-content: center; }
+
+    .hcard  { padding: 18px; }
+    .sval   { font-size: 17px; }
+
+    /* ── Бегущая строка ── */
+    .ti { font-size: 12px; }
+
+    /* ── Секции ── */
+    .sec { padding: 32px 16px; }
+    .stitle { font-size: 22px; margin-bottom: 20px; }
+
+    /* ── Сетки ── */
+    .sg { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .ng { grid-template-columns: 1fr; gap: 14px; }
+    .eg { grid-template-columns: 1fr; gap: 14px; }
+    .tg { grid-template-columns: 1fr; gap: 16px; }
+    .cin { grid-template-columns: 1fr; gap: 24px; }
+
+    /* ── Промо ── */
+    .promo {
+        grid-template-columns: 1fr;
+        padding: 22px 18px;
+        margin: 20px 16px;
+        border-radius: 14px;
+    }
+    .promo img { display: none; }
+    .promo h2  { font-size: 18px; }
+
+    /* ── Манас баннер ── */
+    .manas-banner { padding: 20px 18px; border-radius: 12px; }
+    .manas-banner h2 { font-size: 18px; }
+    .manas-banner .phone-big { font-size: 18px; }
+
+    /* ── Таблицы ── */
+    .ttable {
+        font-size: 12px;
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .ttable thead,
+    .ttable tbody,
+    .ttable th,
+    .ttable td,
+    .ttable tr { display: revert; }
+    .ttable th,
+    .ttable td { padding: 8px 10px; white-space: nowrap; }
+
+    /* ── Тарифные карточки ── */
+    .tc  { padding: 22px 18px; }
+    .tp  { font-size: 28px; }
+
+    /* ── Футер ── */
+    .csec  { padding: 36px 16px 24px; }
+    .fbar  { flex-direction: column; gap: 8px; text-align: center; }
+
+    /* ── Виджет баланса ── */
+    .ig { flex-direction: column; gap: 8px; }
+    .ig button { width: 100%; padding: 12px; }
+
+    /* ── Inline grids (contacts, business…) ── */
+    [style*="grid-template-columns:repeat(3,1fr)"]  { grid-template-columns: 1fr !important; }
+    [style*="grid-template-columns:1fr 1fr"]         { grid-template-columns: 1fr !important; }
+    [style*="grid-template-columns:repeat(4,1fr)"]  { grid-template-columns: repeat(2, 1fr) !important; }
+    [style*="grid-template-columns:2fr 1fr 1fr 1fr"] { grid-template-columns: 1fr !important; }
+
+    /* ── Карточки ── */
+    .accia-card { padding: 20px 16px; }
+    .sc  { padding: 16px 10px; }
+    .sc-img { height: 50px; }
+    .sc h3  { font-size: 13px; }
+    .sc p   { font-size: 11px; }
+    .ec  { padding: 18px 14px; }
+    .nc-img { height: 110px; }
+}
+
+/* ═══════════════════════════════════════════════════
+   МАЛЕНЬКИЙ МОБИЛЬНЫЙ  ≤ 400px
+   ═══════════════════════════════════════════════════ */
+@media (max-width: 400px) {
+    .sg   { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 22px; }
+    [style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: 1fr !important; }
+    .promo { margin: 14px 12px; }
+}
